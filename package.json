@@ -1,0 +1,31 @@
+{
+  "name": "validator-utils-js",
+  "description": "validator-utils-js is a package that validate any input or data type",
+  "version": "0.0.1",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Janabi/validator-utils-js.git"
+  },
+  "keywords": [
+    "validator",
+    "checker",
+    "validation",
+    "utils"
+  ],
+  "author": "arjanabi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Janabi/validator-utils-js/issues"
+  },
+  "homepage": "https://github.com/Janabi/validator-utils-js#readme",
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.2"
+  }
+}
