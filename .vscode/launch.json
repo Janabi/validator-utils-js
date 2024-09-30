@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+        "name": "Your Launch Configuration",
+        "type": "node",
+        "request": "launch",
+        "program": "main.js",
+        }
+    ]
+}
