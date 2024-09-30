@@ -46,4 +46,17 @@ export class StringValidation extends BaseValidation {
         : { valid: false, message: "INVALID_VALUE_LENGTH" }
     );
   }
+
+  isJson() {
+    return this.addRule((data: string) => {
+      try {
+        JSON.parse(data);
+        return { valid: true };
+      } catch (err) {
+        return { valid: false, message: "INVALID_JSON" }
+      }
+    });
+  }
+
+  
 }
