@@ -58,5 +58,13 @@ export class StringValidation extends BaseValidation {
     });
   }
 
-  
+  isUuid() {
+    return this.addRule((data: string) => {
+      const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      const matchedUuid = uuidPattern.test(data);
+      return matchedUuid
+        ? { valid: true }
+        : { valid: false, message: "INVALID_UUID" };
+    });
+  }
 }
