@@ -10,4 +10,8 @@ export class BaseValidation {
   static isString() {
     return new StringValidation();
   }
+
+  static isNumber() {
+    // return new 
+  }
 }
