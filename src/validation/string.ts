@@ -119,4 +119,25 @@ export class StringValidation extends BaseValidation {
         : { valid: false, message: "INVALID_UUID" };
     });
   }
+
+
+  /**
+   * Validates if the string is a valid file path for both Windows and Unix-based systems.
+   * Adds a validation rule that returns true if the string matches a valid file path pattern.
+   * 
+   * Windows file path example: C:\Users\Name\file.txt
+   * Unix file path example: /home/user/file.txt
+   * 
+   * @returns {this} Returns the validation chain with the new rule applied.
+   */
+  isFilePath() {
+    return this.addRule((data: string) => {
+      // Regex pattern for Unix and Windows file paths
+      const filePathPattern = /^(\/[^<>:"|?*]+)+\/?|([a-zA-Z]:\\(?:[^<>:"\/\\|?*]+\\)*[^<>:"\/\\|?*]*)$/;
+      const matchedFilePath = filePathPattern.test(data);
+      return matchedFilePath
+        ? { valid: true }
+        : { valid: false, message: "INVALID_FILE_PATH" };
+    });
+  }
 }
