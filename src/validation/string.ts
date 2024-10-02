@@ -1,4 +1,5 @@
 import { BaseValidation } from "./";
+import { programmingLanguages } from '../config'
 
 export class StringValidation extends BaseValidation {
 
@@ -138,6 +139,21 @@ export class StringValidation extends BaseValidation {
       return matchedFilePath
         ? { valid: true }
         : { valid: false, message: "INVALID_FILE_PATH" };
+    });
+  }
+
+  /**
+   * Validates if the string is a known programming language name.
+   * Adds a validation rule that checks if the string matches one of the known programming languages.
+   * 
+   * @returns {this} Returns the validation chain with the new rule applied.
+   */
+  isProgrammingLanguage() {
+    return this.addRule((data: string) => {
+      const isValidLanguage = programmingLanguages.includes(data);
+      return isValidLanguage
+        ? { valid: true }
+        : { valid: false, message: "INVALID_PROGRAMMING_LANGUAGE" };
     });
   }
 }
