@@ -25,3 +25,5 @@ export const programmingLanguages = [
   "SQL",
   "MATLAB",
 ];
+
+export const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];

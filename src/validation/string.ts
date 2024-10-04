@@ -1,5 +1,5 @@
 import { BaseValidation } from "./";
-import { programmingLanguages } from '../config'
+import { programmingLanguages, daysOfWeek } from '../config'
 
 export class StringValidation extends BaseValidation {
 
@@ -154,6 +154,15 @@ export class StringValidation extends BaseValidation {
       return isValidLanguage
         ? { valid: true }
         : { valid: false, message: "INVALID_PROGRAMMING_LANGUAGE" };
+    });
+  }
+
+  isDay() {
+    return this.addRule((data: string) => {
+      const isValidDay = daysOfWeek.includes(data.toLowerCase());
+      return isValidDay
+        ? { valid: true }
+        : { valid: false, message: "INVALID_DAY" };
     });
   }
 }
