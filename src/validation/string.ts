@@ -157,6 +157,17 @@ export class StringValidation extends BaseValidation {
     });
   }
 
+  /**
+   * Adds a rule to check if the input is a valid day of the week.
+   * The input is validated by checking if it matches one of the days in the `daysOfWeek` array.
+   * 
+   * @returns {StringValidator} - The current instance for method chaining.
+   * 
+   * Example usage:
+   * BaseValidator.isString().isDay().validate("monday");
+   * 
+   * Note: This method is case-insensitive, so "Monday" and "monday" both pass validation.
+   */
   isDay() {
     return this.addRule((data: string) => {
       const isValidDay = daysOfWeek.includes(data.toLowerCase());
@@ -166,6 +177,17 @@ export class StringValidation extends BaseValidation {
     });
   }
 
+  /**
+   * Adds a rule to check if the input is a valid month of the year.
+   * The input is validated by checking if it matches one of the months in the `monthOfYear` array.
+   * 
+   * @returns {StringValidator} - The current instance for method chaining.
+   * 
+   * Example usage:
+   * BaseValidator.isString().isMonth().validate("january");
+   * 
+   * Note: This method is case-insensitive, so "January" and "january" both pass validation.
+   */
   isMonth() {
     return this.addRule((data: string) => {
       const isValidMonth = monthOfYear.includes(data.toLowerCase());
