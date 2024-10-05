@@ -1,5 +1,5 @@
 import { BaseValidation } from "./";
-import { programmingLanguages, daysOfWeek } from '../config'
+import { programmingLanguages, daysOfWeek, monthOfYear } from '../config'
 
 export class StringValidation extends BaseValidation {
 
@@ -163,6 +163,15 @@ export class StringValidation extends BaseValidation {
       return isValidDay
         ? { valid: true }
         : { valid: false, message: "INVALID_DAY" };
+    });
+  }
+
+  isMonth() {
+    return this.addRule((data: string) => {
+      const isValidMonth = monthOfYear.includes(data.toLowerCase());
+      return isValidMonth
+        ? { valid: true }
+        : { valid: false, message: "INVALID_MONTH" };
     });
   }
 }
