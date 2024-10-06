@@ -1,4 +1,4 @@
-import { NumberValidation, StringValidation } from "./";
+import { DateValidation, NumberValidation, StringValidation } from "./";
 
 export class BaseValidation {
   protected rules: any[] = [];
@@ -13,5 +13,9 @@ export class BaseValidation {
 
   static isNumber() {
     return new NumberValidation();
+  }
+
+  static isDate() {
+    return new DateValidation();
   }
 }
