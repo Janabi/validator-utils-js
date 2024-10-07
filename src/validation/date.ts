@@ -96,4 +96,24 @@ export class DateValidation extends BaseValidation {
         : { valid: false, message: "INVALID_DATE_RANGE" };
     });
   }
+
+  /**
+   * Checks if the date falls on a weekend (Saturday or Sunday).
+   * Adds a validation rule that returns true if the date is a weekend.
+   * If the date is not a weekend, it returns an invalid message.
+   * 
+   * @returns {this} Returns the validation chain with the new rule applied.
+   */
+  isWeekend() {
+    return this.addRule((data: string) => {
+      const inputDate = new Date(data);
+      const dayOfWeek = inputDate.getDay(); // 0 = Sunday, 6 = Saturday
+
+      const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+
+      return isWeekend
+        ? { valid: true }
+        : { valid: false, message: "INVALID_NOT_WEEKEND" };
+    });
+  }
 }
