@@ -89,4 +89,58 @@ export class NumberValidation extends BaseValidation {
       return (data & (1 << (bitPosition - 1))) !== 0;
     });
   }
+
+  /**
+   * Adds a rule to check if the input number is less than the specified suggested number.
+   * This validation will pass if the input number is less than the given number.
+   *
+   * @param {number} suggestedNumber - The number to compare against.
+   * @returns {this} Returns the validation chain with the new rule applied.
+   *
+   * Example usage:
+   * BaseValidator.number().isLess(10).validate(8); // valid: true
+   */
+  isLess(suggestedNumber: number) {
+    return this.addRule((data: number) => {
+      return data < suggestedNumber
+        ? { valid: true }
+        : { valid: false, message: "INVALID_LESS" };
+    });
+  }
+
+  /**
+   * Adds a rule to check if the input number is greater than the specified suggested number.
+   * This validation will pass if the input number is greater than the given number.
+   *
+   * @param {number} suggestedNumber - The number to compare against.
+   * @returns {this} Returns the validation chain with the new rule applied.
+   *
+   * Example usage:
+   * BaseValidator.number().isGreater(10).validate(12); // valid: true
+   */
+  isGreater(suggestedNumber: number) {
+    return this.addRule((data: number) => {
+      return data > suggestedNumber
+        ? { valid: true }
+        : { valid: false, message: "INVALID_GREATER" };
+    });
+  }
+
+  /**
+   * Adds a rule to check if the input number is equal to the specified suggested number.
+   * This validation will pass if the input number is exactly equal to the given number.
+   *
+   * @param {number} suggestedNumber - The number to compare for equality.
+   * @returns {this} Returns the validation chain with the new rule applied.
+   *
+   * Example usage:
+   * BaseValidator.number().isEqual(5).validate(5); // valid: true
+   */
+  isEqual(suggestedNumber: number) {
+    return this.addRule((data: number) => {
+      return data === suggestedNumber
+        ? { valid: true }
+        : { valid: false, message: "INVALID_EQUAL" };
+    });
+  }
 }
