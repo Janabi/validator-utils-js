@@ -1,13 +1,12 @@
 import { BaseValidation } from "./";
-import { programmingLanguages, daysOfWeek, monthOfYear } from '../config'
+import { programmingLanguages, daysOfWeek, monthOfYear } from "../config";
 
 export class StringValidation extends BaseValidation {
-
   /**
    * Validates if the string is in a valid email format.
    * Adds a validation rule that returns true if the string matches an email regex pattern.
    * If it does not match, returns an invalid email message.
-   * 
+   *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isEmail() {
@@ -24,7 +23,7 @@ export class StringValidation extends BaseValidation {
    * Validates if the string is a valid phone number in E.164 format.
    * Adds a validation rule that returns true if the string matches the international phone number regex.
    * If it does not match, returns an invalid phone number message.
-   * 
+   *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isPhoneNumber() {
@@ -41,7 +40,7 @@ export class StringValidation extends BaseValidation {
    * Validates if the string is a valid URL.
    * Adds a validation rule that returns true if the string matches a basic URL pattern.
    * If it does not match, returns an invalid URL message.
-   * 
+   *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isUrl() {
@@ -58,7 +57,7 @@ export class StringValidation extends BaseValidation {
    * Validates if the string has a minimum length.
    * Adds a validation rule that returns true if the string length is greater than or equal to `minNumber`.
    * If the string length is less, returns an invalid value length message.
-   * 
+   *
    * @param {number} minNumber - The minimum length allowed for the string.
    * @returns {this} Returns the validation chain with the new rule applied.
    */
@@ -74,7 +73,7 @@ export class StringValidation extends BaseValidation {
    * Validates if the string has a maximum length.
    * Adds a validation rule that returns true if the string length is less than or equal to `maxNumber`.
    * If the string length exceeds the limit, returns an invalid value length message.
-   * 
+   *
    * @param {number} maxNumber - The maximum length allowed for the string.
    * @returns {this} Returns the validation chain with the new rule applied.
    */
@@ -90,7 +89,7 @@ export class StringValidation extends BaseValidation {
    * Validates if the string is a valid JSON format.
    * Adds a validation rule that tries to parse the string as JSON.
    * If parsing succeeds, returns valid. If it throws an error, returns an invalid JSON message.
-   * 
+   *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isJson() {
@@ -108,12 +107,13 @@ export class StringValidation extends BaseValidation {
    * Validates if the string is a valid UUID (Universally Unique Identifier).
    * Adds a validation rule that returns true if the string matches a standard UUID pattern.
    * If it does not match, returns an invalid UUID message.
-   * 
+   *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isUuid() {
     return this.addRule((data: string) => {
-      const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      const uuidPattern =
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
       const matchedUuid = uuidPattern.test(data);
       return matchedUuid
         ? { valid: true }
@@ -121,20 +121,20 @@ export class StringValidation extends BaseValidation {
     });
   }
 
-
   /**
    * Validates if the string is a valid file path for both Windows and Unix-based systems.
    * Adds a validation rule that returns true if the string matches a valid file path pattern.
-   * 
+   *
    * Windows file path example: C:\Users\Name\file.txt
    * Unix file path example: /home/user/file.txt
-   * 
+   *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isFilePath() {
     return this.addRule((data: string) => {
       // Regex pattern for Unix and Windows file paths
-      const filePathPattern = /^(\/[^<>:"|?*]+)+\/?|([a-zA-Z]:\\(?:[^<>:"\/\\|?*]+\\)*[^<>:"\/\\|?*]*)$/;
+      const filePathPattern =
+        /^(\/[^<>:"|?*]+)+\/?|([a-zA-Z]:\\(?:[^<>:"\/\\|?*]+\\)*[^<>:"\/\\|?*]*)$/;
       const matchedFilePath = filePathPattern.test(data);
       return matchedFilePath
         ? { valid: true }
@@ -145,7 +145,7 @@ export class StringValidation extends BaseValidation {
   /**
    * Validates if the string is a known programming language name.
    * Adds a validation rule that checks if the string matches one of the known programming languages.
-   * 
+   *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isProgrammingLanguage() {
@@ -160,12 +160,12 @@ export class StringValidation extends BaseValidation {
   /**
    * Adds a rule to check if the input is a valid day of the week.
    * The input is validated by checking if it matches one of the days in the `daysOfWeek` array.
-   * 
+   *
    * @returns {StringValidator} - The current instance for method chaining.
-   * 
+   *
    * Example usage:
    * BaseValidator.isString().isDay().validate("monday");
-   * 
+   *
    * Note: This method is case-insensitive, so "Monday" and "monday" both pass validation.
    */
   isDay() {
@@ -180,12 +180,12 @@ export class StringValidation extends BaseValidation {
   /**
    * Adds a rule to check if the input is a valid month of the year.
    * The input is validated by checking if it matches one of the months in the `monthOfYear` array.
-   * 
+   *
    * @returns {StringValidator} - The current instance for method chaining.
-   * 
+   *
    * Example usage:
    * BaseValidator.isString().isMonth().validate("january");
-   * 
+   *
    * Note: This method is case-insensitive, so "January" and "january" both pass validation.
    */
   isMonth() {
