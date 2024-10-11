@@ -2,6 +2,14 @@ import { BaseValidation } from "./";
 import { programmingLanguages, daysOfWeek, monthOfYear } from "../config";
 
 export class StringValidation extends BaseValidation {
+  constructor() {
+    super();
+    this.addRule((data: string) =>
+      typeof data === "string"
+        ? { valid: true }
+        : { valid: false, message: "INVALID_STRING" }
+    );
+  }
   /**
    * Validates if the string is in a valid email format.
    * Adds a validation rule that returns true if the string matches an email regex pattern.
@@ -9,14 +17,16 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isEmail() {
-    return this.addRule((data: string) => {
+  isEmail(): StringValidation {
+    this.addRule((data: string) => {
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       const matchedEmail = emailPattern.test(data);
       return matchedEmail
         ? { valid: true }
         : { valid: false, message: "INVALID_EMAIL" };
     });
+
+    return this;
   }
 
   /**
@@ -26,14 +36,16 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isPhoneNumber() {
-    return this.addRule((data: string) => {
+  isPhoneNumber(): StringValidation {
+    this.addRule((data: string) => {
       const phoneNumberPattern = /^\+?[1-9]\d{1,14}$/; // E.164 format (international phone numbers)
       const matchedPhoneNumber = phoneNumberPattern.test(data);
       return matchedPhoneNumber
         ? { valid: true }
         : { valid: false, message: "INVALID_PHONE_NUMBER" };
     });
+
+    return this;
   }
 
   /**
@@ -43,14 +55,16 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isUrl() {
-    return this.addRule((data: string) => {
+  isUrl(): StringValidation {
+    this.addRule((data: string) => {
       const urlPattern = /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-]*)*\/?$/;
       const matchedUrl = urlPattern.test(data);
       return matchedUrl
         ? { valid: true }
         : { valid: false, message: "INVALID_URL" };
     });
+
+    return this;
   }
 
   /**
@@ -61,12 +75,14 @@ export class StringValidation extends BaseValidation {
    * @param {number} minNumber - The minimum length allowed for the string.
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  min(minNumber: number) {
-    return this.addRule((data: string) =>
+  min(minNumber: number): StringValidation {
+    this.addRule((data: string) =>
       data.length >= minNumber
         ? { valid: true }
         : { valid: false, message: "INVALID_VALUE_LENGTH" }
     );
+
+    return this;
   }
 
   /**
@@ -77,12 +93,14 @@ export class StringValidation extends BaseValidation {
    * @param {number} maxNumber - The maximum length allowed for the string.
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  max(maxNumber: number) {
-    return this.addRule((data: string) =>
+  max(maxNumber: number): StringValidation {
+    this.addRule((data: string) =>
       data.length <= maxNumber
         ? { valid: true }
         : { valid: false, message: "INVALID_VALUE_LENGTH" }
     );
+
+    return this;
   }
 
   /**
@@ -92,8 +110,8 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isJson() {
-    return this.addRule((data: string) => {
+  isJson(): StringValidation {
+    this.addRule((data: string) => {
       try {
         JSON.parse(data);
         return { valid: true };
@@ -101,6 +119,8 @@ export class StringValidation extends BaseValidation {
         return { valid: false, message: "INVALID_JSON" };
       }
     });
+
+    return this;
   }
 
   /**
@@ -110,8 +130,8 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isUuid() {
-    return this.addRule((data: string) => {
+  isUuid(): StringValidation {
+    this.addRule((data: string) => {
       const uuidPattern =
         /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
       const matchedUuid = uuidPattern.test(data);
@@ -119,6 +139,8 @@ export class StringValidation extends BaseValidation {
         ? { valid: true }
         : { valid: false, message: "INVALID_UUID" };
     });
+
+    return this;
   }
 
   /**
@@ -130,8 +152,8 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isFilePath() {
-    return this.addRule((data: string) => {
+  isFilePath(): StringValidation {
+    this.addRule((data: string) => {
       // Regex pattern for Unix and Windows file paths
       const filePathPattern =
         /^(\/[^<>:"|?*]+)+\/?|([a-zA-Z]:\\(?:[^<>:"\/\\|?*]+\\)*[^<>:"\/\\|?*]*)$/;
@@ -140,6 +162,8 @@ export class StringValidation extends BaseValidation {
         ? { valid: true }
         : { valid: false, message: "INVALID_FILE_PATH" };
     });
+
+    return this;
   }
 
   /**
@@ -148,52 +172,58 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isProgrammingLanguage() {
-    return this.addRule((data: string) => {
+  isProgrammingLanguage(): StringValidation {
+    this.addRule((data: string) => {
       const isValidLanguage = programmingLanguages.includes(data);
       return isValidLanguage
         ? { valid: true }
         : { valid: false, message: "INVALID_PROGRAMMING_LANGUAGE" };
     });
+
+    return this;
   }
 
   /**
    * Adds a rule to check if the input is a valid day of the week.
    * The input is validated by checking if it matches one of the days in the `daysOfWeek` array.
    *
-   * @returns {StringValidator} - The current instance for method chaining.
+   * @returns {this} - The current instance for method chaining.
    *
    * Example usage:
    * BaseValidator.isString().isDay().validate("monday");
    *
    * Note: This method is case-insensitive, so "Monday" and "monday" both pass validation.
    */
-  isDay() {
-    return this.addRule((data: string) => {
+  isDay(): StringValidation {
+    this.addRule((data: string) => {
       const isValidDay = daysOfWeek.includes(data.toLowerCase());
       return isValidDay
         ? { valid: true }
         : { valid: false, message: "INVALID_DAY" };
     });
+
+    return this;
   }
 
   /**
    * Adds a rule to check if the input is a valid month of the year.
    * The input is validated by checking if it matches one of the months in the `monthOfYear` array.
    *
-   * @returns {StringValidator} - The current instance for method chaining.
+   * @returns {this} - The current instance for method chaining.
    *
    * Example usage:
    * BaseValidator.isString().isMonth().validate("january");
    *
    * Note: This method is case-insensitive, so "January" and "january" both pass validation.
    */
-  isMonth() {
-    return this.addRule((data: string) => {
+  isMonth(): StringValidation {
+    this.addRule((data: string) => {
       const isValidMonth = monthOfYear.includes(data.toLowerCase());
       return isValidMonth
         ? { valid: true }
         : { valid: false, message: "INVALID_MONTH" };
     });
+
+    return this;
   }
 }
