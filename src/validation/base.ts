@@ -13,7 +13,7 @@ export class BaseValidation {
   }
 
   // Validate method to execute all rules in the chain
-  protected validate(data: any) {
+  validate(data: any) {
     for (let rule of this.rules) {
       const result = rule(data);
       if (!result.valid) {

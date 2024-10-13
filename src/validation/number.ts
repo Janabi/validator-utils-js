@@ -1,6 +1,14 @@
 import { BaseValidation } from ".";
 
 export class NumberValidation extends BaseValidation {
+  constructor() {
+    super();
+    this.addRule((data: number) =>
+      typeof data === "number"
+        ? { valid: true }
+        : { valid: false, message: "INVALID_NUMBER" }
+    );
+  }
   /**
    * Checks if the number is positive (greater than or equal to 0).
    * Adds a validation rule that returns true if the number is positive.
@@ -8,12 +16,14 @@ export class NumberValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isPositive() {
-    return this.addRule((data: number) => {
+  isPositive(): this {
+    this.addRule((data: number) => {
       return data >= 0
         ? { valid: true }
         : { valid: false, message: "INVALID_POSITIVE" };
     });
+
+    return this;
   }
 
   /**
@@ -23,12 +33,14 @@ export class NumberValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isNegative() {
-    return this.addRule((data: number) => {
+  isNegative(): this {
+    this.addRule((data: number) => {
       return data <= 0
         ? { valid: true }
         : { valid: false, message: "INVALID_NEGATIVE" };
     });
+
+    return this;
   }
 
   /**
@@ -38,12 +50,14 @@ export class NumberValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isZero() {
-    return this.addRule((data: number) => {
+  isZero(): this {
+    this.addRule((data: number) => {
       return data === 0
         ? { valid: true }
         : { valid: false, message: "INVALID_ZERO" };
     });
+
+    return this;
   }
 
   /**
@@ -53,12 +67,14 @@ export class NumberValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isOdd() {
-    return this.addRule((data: number) => {
+  isOdd(): this {
+    this.addRule((data: number) => {
       return data % 2 !== 0
         ? { valid: true }
         : { valid: false, message: "INVALID_ODD_NUMBER" };
     });
+
+    return this;
   }
 
   /**
@@ -68,12 +84,14 @@ export class NumberValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isEven() {
-    return this.addRule((data: number) => {
+  isEven(): this {
+    this.addRule((data: number) => {
       return data % 2 === 0
         ? { valid: true }
         : { valid: false, message: "INVALID_EVEN_NUMBER" };
     });
+
+    return this;
   }
 
   /**
@@ -84,10 +102,12 @@ export class NumberValidation extends BaseValidation {
    * @param {number} bitPosition - The position of the bit to check (1-based index).
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isBitSet(bitPosition: number) {
-    return this.addRule((data: number) => {
+  isBitSet(bitPosition: number): this {
+    this.addRule((data: number) => {
       return (data & (1 << (bitPosition - 1))) !== 0;
     });
+
+    return this;
   }
 
   /**
@@ -98,14 +118,16 @@ export class NumberValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    *
    * Example usage:
-   * BaseValidator.number().isLess(10).validate(8); // valid: true
+   * BaseValidator.isNumber().isLess(10).validate(8); // valid: true
    */
-  isLess(suggestedNumber: number) {
-    return this.addRule((data: number) => {
+  isLess(suggestedNumber: number): this {
+    this.addRule((data: number) => {
       return data < suggestedNumber
         ? { valid: true }
         : { valid: false, message: "INVALID_LESS" };
     });
+
+    return this;
   }
 
   /**
@@ -116,14 +138,16 @@ export class NumberValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    *
    * Example usage:
-   * BaseValidator.number().isGreater(10).validate(12); // valid: true
+   * BaseValidator.isNumber().isGreater(10).validate(12); // valid: true
    */
-  isGreater(suggestedNumber: number) {
-    return this.addRule((data: number) => {
+  isGreater(suggestedNumber: number): this {
+    this.addRule((data: number) => {
       return data > suggestedNumber
         ? { valid: true }
         : { valid: false, message: "INVALID_GREATER" };
     });
+
+    return this;
   }
 
   /**
@@ -134,13 +158,15 @@ export class NumberValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    *
    * Example usage:
-   * BaseValidator.number().isEqual(5).validate(5); // valid: true
+   * BaseValidator.isNumber().isEqual(5).validate(5); // valid: true
    */
-  isEqual(suggestedNumber: number) {
-    return this.addRule((data: number) => {
+  isEqual(suggestedNumber: number): this {
+    this.addRule((data: number) => {
       return data === suggestedNumber
         ? { valid: true }
         : { valid: false, message: "INVALID_EQUAL" };
     });
+
+    return this;
   }
 }
