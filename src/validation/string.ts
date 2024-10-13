@@ -17,7 +17,7 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isEmail(): StringValidation {
+  isEmail(): this {
     this.addRule((data: string) => {
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       const matchedEmail = emailPattern.test(data);
@@ -36,7 +36,7 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isPhoneNumber(): StringValidation {
+  isPhoneNumber(): this {
     this.addRule((data: string) => {
       const phoneNumberPattern = /^\+?[1-9]\d{1,14}$/; // E.164 format (international phone numbers)
       const matchedPhoneNumber = phoneNumberPattern.test(data);
@@ -55,7 +55,7 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isUrl(): StringValidation {
+  isUrl(): this {
     this.addRule((data: string) => {
       const urlPattern = /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-]*)*\/?$/;
       const matchedUrl = urlPattern.test(data);
@@ -75,7 +75,7 @@ export class StringValidation extends BaseValidation {
    * @param {number} minNumber - The minimum length allowed for the string.
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  min(minNumber: number): StringValidation {
+  min(minNumber: number): this {
     this.addRule((data: string) =>
       data.length >= minNumber
         ? { valid: true }
@@ -93,7 +93,7 @@ export class StringValidation extends BaseValidation {
    * @param {number} maxNumber - The maximum length allowed for the string.
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  max(maxNumber: number): StringValidation {
+  max(maxNumber: number): this {
     this.addRule((data: string) =>
       data.length <= maxNumber
         ? { valid: true }
@@ -110,7 +110,7 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isJson(): StringValidation {
+  isJson(): this {
     this.addRule((data: string) => {
       try {
         JSON.parse(data);
@@ -130,7 +130,7 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isUuid(): StringValidation {
+  isUuid(): this {
     this.addRule((data: string) => {
       const uuidPattern =
         /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -152,7 +152,7 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isFilePath(): StringValidation {
+  isFilePath(): this {
     this.addRule((data: string) => {
       // Regex pattern for Unix and Windows file paths
       const filePathPattern =
@@ -172,7 +172,7 @@ export class StringValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isProgrammingLanguage(): StringValidation {
+  isProgrammingLanguage(): this {
     this.addRule((data: string) => {
       const isValidLanguage = programmingLanguages.includes(data);
       return isValidLanguage
@@ -194,7 +194,7 @@ export class StringValidation extends BaseValidation {
    *
    * Note: This method is case-insensitive, so "Monday" and "monday" both pass validation.
    */
-  isDay(): StringValidation {
+  isDay(): this {
     this.addRule((data: string) => {
       const isValidDay = daysOfWeek.includes(data.toLowerCase());
       return isValidDay
@@ -216,7 +216,7 @@ export class StringValidation extends BaseValidation {
    *
    * Note: This method is case-insensitive, so "January" and "january" both pass validation.
    */
-  isMonth(): StringValidation {
+  isMonth(): this {
     this.addRule((data: string) => {
       const isValidMonth = monthOfYear.includes(data.toLowerCase());
       return isValidMonth

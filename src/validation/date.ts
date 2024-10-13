@@ -1,6 +1,14 @@
-import { BaseValidation } from ".";
+import { BaseValidation } from "./";
 
 export class DateValidation extends BaseValidation {
+  constructor() {
+    super();
+    this.addRule((data: string) =>
+      typeof data === "string"
+        ? { valid: true }
+        : { valid: false, message: "INVALID_DATE" }
+    );
+  }
   /**
    * Checks if the date is in the format YYYY-MM-DD.
    * Adds a validation rule that returns true if the date is in the correct format.
@@ -8,13 +16,15 @@ export class DateValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isValidFormat() {
-    return this.addRule((data: string) => {
+  isValidFormat(): this {
+    this.addRule((data: string) => {
       const datePattern = /^\d{4}-\d{2}-\d{2}$/;
       return datePattern.test(data)
         ? { valid: true }
         : { valid: false, message: "INVALID_DATE_FORMAT" };
     });
+
+    return this;
   }
 
   /**
@@ -24,8 +34,8 @@ export class DateValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isValidDate() {
-    return this.addRule((data: string) => {
+  isValidDate(): this {
+    this.addRule((data: string) => {
       const [year, month, day] = data.split("-").map(Number);
       const dateObject = new Date(year, month - 1, day);
 
@@ -38,6 +48,8 @@ export class DateValidation extends BaseValidation {
         ? { valid: true }
         : { valid: false, message: "INVALID_DATE" };
     });
+
+    return this;
   }
 
   /**
@@ -47,8 +59,8 @@ export class DateValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isInThePast() {
-    return this.addRule((data: string) => {
+  isInThePast(): this {
+    this.addRule((data: string) => {
       const inputDate = new Date(data);
       const currentDate = new Date();
 
@@ -56,6 +68,8 @@ export class DateValidation extends BaseValidation {
         ? { valid: true }
         : { valid: false, message: "INVALID_PAST_DATE" };
     });
+
+    return this;
   }
 
   /**
@@ -65,8 +79,8 @@ export class DateValidation extends BaseValidation {
    *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isInTheFuture() {
-    return this.addRule((data: string) => {
+  isInTheFuture(): this {
+    this.addRule((data: string) => {
       const inputDate = new Date(data);
       const currentDate = new Date();
 
@@ -74,6 +88,8 @@ export class DateValidation extends BaseValidation {
         ? { valid: true }
         : { valid: false, message: "INVALID_FUTURE_DATE" };
     });
+
+    return this;
   }
 
   /**
@@ -85,8 +101,8 @@ export class DateValidation extends BaseValidation {
    * @param {string} endDate - The end date of the range in YYYY-MM-DD format.
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isWithinRange(startDate: string, endDate: string) {
-    return this.addRule((data: string) => {
+  isWithinRange(startDate: string, endDate: string): this {
+    this.addRule((data: string) => {
       const inputDate = new Date(data);
       const start = new Date(startDate);
       const end = new Date(endDate);
@@ -95,6 +111,8 @@ export class DateValidation extends BaseValidation {
         ? { valid: true }
         : { valid: false, message: "INVALID_DATE_RANGE" };
     });
+
+    return this;
   }
 
   /**
@@ -104,8 +122,8 @@ export class DateValidation extends BaseValidation {
    * 
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isWeekend() {
-    return this.addRule((data: string) => {
+  isWeekend(): this {
+    this.addRule((data: string) => {
       const inputDate = new Date(data);
       const dayOfWeek = inputDate.getDay(); // 0 = Sunday, 6 = Saturday
 
@@ -115,5 +133,7 @@ export class DateValidation extends BaseValidation {
         ? { valid: true }
         : { valid: false, message: "INVALID_NOT_WEEKEND" };
     });
+
+    return this;
   }
 }
