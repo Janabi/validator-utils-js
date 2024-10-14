@@ -16,7 +16,8 @@
     "validator",
     "checker",
     "validation",
-    "utils"
+    "utils",
+    "joi"
   ],
   "author": "arjanabi",
   "license": "ISC",
