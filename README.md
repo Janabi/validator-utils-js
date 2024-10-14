@@ -1,6 +1,6 @@
 # Validator Utils JS
 
-**validator-utils-js** is a flexible and lightweight JavaScript validation library for handling common data validation tasks such as validating strings, numbers, dates, and booleans. It provides a simple chainable API to validate and customize various input types efficiently.
+**validator-utils-js** is a flexible and lightweight JavaScript validation library for handling common data validation tasks such as validating strings, numbers, dates, and booleans. It provides a simple chainable methods to validate and customize various input types efficiently.
 
 ## Features
 
