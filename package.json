@@ -1,7 +1,7 @@
 {
   "name": "validator-utils-js",
   "description": "validator-utils-js is a package that validate any input or data type",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
