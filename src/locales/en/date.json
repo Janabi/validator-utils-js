@@ -1,0 +1,8 @@
+{
+  "INVALID_DATE": "The input is not a valid date.",
+  "INVALID_DATE_FORMAT": "The date format is not valid.",
+  "INVALID_PAST_DATE": "The date must be in the past.",
+  "INVALID_FUTURE_DATE": "The date must be in the future.",
+  "INVALID_DATE_RANGE": "The date range is not valid.",
+  "INVALID_NOT_WEEKEND": "The date must fall on a weekend."
+}

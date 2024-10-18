@@ -1,4 +1,5 @@
 import { BaseValidation } from "./";
+import * as path from "path";
 
 export class DateValidation extends BaseValidation {
   constructor() {
@@ -119,7 +120,7 @@ export class DateValidation extends BaseValidation {
    * Checks if the date falls on a weekend (Saturday or Sunday).
    * Adds a validation rule that returns true if the date is a weekend.
    * If the date is not a weekend, it returns an invalid message.
-   * 
+   *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isWeekend(): this {
@@ -127,7 +128,7 @@ export class DateValidation extends BaseValidation {
       const inputDate = new Date(data);
       const dayOfWeek = inputDate.getDay(); // 0 = Sunday, 6 = Saturday
 
-      const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+      const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
       return isWeekend
         ? { valid: true }

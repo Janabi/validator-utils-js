@@ -1,0 +1,13 @@
+{
+  "INVALID_STRING": "The input is not a valid string.",
+  "INVALID_EMAIL": "The input is not a valid email address.",
+  "INVALID_PHONE_NUMBER": "The input is not a valid phone number.",
+  "INVALID_URL": "The input is not a valid URL.",
+  "INVALID_VALUE_LENGTH": "The input does not meet the required length.",
+  "INVALID_JSON": "The input is not a valid JSON.",
+  "INVALID_UUID": "The input is not a valid UUID.",
+  "INVALID_FILE_PATH": "The input is not a valid file path.",
+  "INVALID_PROGRAMMING_LANGUAGE": "The input is not a valid programming language.",
+  "INVALID_DAY": "The input is not a valid day.",
+  "INVALID_MONTH": "The input is not a valid month."
+}

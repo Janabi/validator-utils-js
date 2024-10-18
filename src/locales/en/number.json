@@ -1,0 +1,11 @@
+{
+  "INVALID_NUMBER": "The input is not a valid number.",
+  "INVALID_POSITIVE": "The number must be positive.",
+  "INVALID_NEGATIVE": "The number must be negative.",
+  "INVALID_ZERO": "The number cannot be zero.",
+  "INVALID_ODD_NUMBER": "The number must be odd.",
+  "INVALID_EVEN_NUMBER": "The number must be even.",
+  "INVALID_LESS": "The number must be less than the specified value.",
+  "INVALID_GREATER": "The number must be greater than the specified value.",
+  "INVALID_EQUAL": "The number must be equal to the specified value."
+}
