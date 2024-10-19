@@ -1,12 +1,20 @@
-import { BaseValidation } from ".";
+import { BaseValidation } from "./";
+import { TValidationParam } from "../types/base.types";
+import { LocalTranslation } from "../utils/loadTranslation.utils";
 
 export class NumberValidation extends BaseValidation {
-  constructor() {
+  private loadTranslation: LocalTranslation;
+  constructor(param?: TValidationParam) {
     super();
+    this.loadTranslation = new LocalTranslation("number", param?.langauge);
     this.addRule((data: number) =>
       typeof data === "number"
         ? { valid: true }
-        : { valid: false, message: "INVALID_NUMBER" }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_NUMBER"),
+            messageKey: "INVALID_NUMBER",
+          }
     );
   }
   /**
@@ -20,7 +28,11 @@ export class NumberValidation extends BaseValidation {
     this.addRule((data: number) => {
       return data >= 0
         ? { valid: true }
-        : { valid: false, message: "INVALID_POSITIVE" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_POSITIVE"),
+            messageKey: "INVALID_POSITIVE",
+          };
     });
 
     return this;
@@ -37,7 +49,11 @@ export class NumberValidation extends BaseValidation {
     this.addRule((data: number) => {
       return data <= 0
         ? { valid: true }
-        : { valid: false, message: "INVALID_NEGATIVE" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_NEGATIVE"),
+            messageKey: "INVALID_NEGATIVE",
+          };
     });
 
     return this;
@@ -54,7 +70,11 @@ export class NumberValidation extends BaseValidation {
     this.addRule((data: number) => {
       return data === 0
         ? { valid: true }
-        : { valid: false, message: "INVALID_ZERO" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_ZERO"),
+            messageKey: "INVALID_ZERO",
+          };
     });
 
     return this;
@@ -71,7 +91,11 @@ export class NumberValidation extends BaseValidation {
     this.addRule((data: number) => {
       return data % 2 !== 0
         ? { valid: true }
-        : { valid: false, message: "INVALID_ODD_NUMBER" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_ODD_NUMBER"),
+            messageKey: "INVALID_ODD_NUMBER",
+          };
     });
 
     return this;
@@ -88,7 +112,11 @@ export class NumberValidation extends BaseValidation {
     this.addRule((data: number) => {
       return data % 2 === 0
         ? { valid: true }
-        : { valid: false, message: "INVALID_EVEN_NUMBER" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_EVEN_NUMBER"),
+            messageKey: "INVALID_EVEN_NUMBER",
+          };
     });
 
     return this;
@@ -102,13 +130,14 @@ export class NumberValidation extends BaseValidation {
    * @param {number} bitPosition - The position of the bit to check (1-based index).
    * @returns {this} Returns the validation chain with the new rule applied.
    */
-  isBitSet(bitPosition: number): this {
-    this.addRule((data: number) => {
-      return (data & (1 << (bitPosition - 1))) !== 0;
-    });
+  // this method is deprecated
+  // isBitSet(bitPosition: number): this {
+  //   this.addRule((data: number) => {
+  //     return (data & (1 << (bitPosition - 1))) !== 0;
+  //   });
 
-    return this;
-  }
+  //   return this;
+  // }
 
   /**
    * Adds a rule to check if the input number is less than the specified suggested number.
@@ -124,7 +153,11 @@ export class NumberValidation extends BaseValidation {
     this.addRule((data: number) => {
       return data < suggestedNumber
         ? { valid: true }
-        : { valid: false, message: "INVALID_LESS" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_LESS"),
+            messageKey: "INVALID_LESS",
+          };
     });
 
     return this;
@@ -144,7 +177,11 @@ export class NumberValidation extends BaseValidation {
     this.addRule((data: number) => {
       return data > suggestedNumber
         ? { valid: true }
-        : { valid: false, message: "INVALID_GREATER" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_GREATER"),
+            messageKey: "INVALID_GREATER",
+          };
     });
 
     return this;
@@ -164,7 +201,11 @@ export class NumberValidation extends BaseValidation {
     this.addRule((data: number) => {
       return data === suggestedNumber
         ? { valid: true }
-        : { valid: false, message: "INVALID_EQUAL" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_EQUAL"),
+            messageKey: "INVALID_EQUAL",
+          };
     });
 
     return this;

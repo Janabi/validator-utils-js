@@ -1,12 +1,20 @@
-import { BaseValidation } from ".";
+import { BaseValidation } from "./";
+import { TValidationParam } from "../types/base.types";
+import { LocalTranslation } from "../utils/loadTranslation.utils";
 
 export class BoolValidation extends BaseValidation {
-  constructor() {
+  private loadTranslation: LocalTranslation;
+  constructor(param?: TValidationParam) {
     super();
+    this.loadTranslation = new LocalTranslation("boolean", param?.langauge);
     this.addRule((data: string) =>
       typeof data === "boolean"
         ? { valid: true }
-        : { valid: false, message: "INVALID_BOOLEAN" }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_BOOLEAN"),
+            messageKey: "INVALID_BOOLEAN",
+          }
     );
   }
 }
