@@ -1,12 +1,20 @@
 import { BaseValidation } from "./";
+import { TValidationParam } from "../types/base.types";
+import { LocalTranslation } from "../utils/loadTranslation.utils";
 
 export class DateValidation extends BaseValidation {
-  constructor() {
+  private loadTranslation: LocalTranslation;
+  constructor(param?: TValidationParam) {
     super();
+    this.loadTranslation = new LocalTranslation("date", param?.langauge);
     this.addRule((data: string) =>
       typeof data === "string"
         ? { valid: true }
-        : { valid: false, message: "INVALID_DATE" }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_DATE"),
+            messageKey: "INVALID_DATE",
+          }
     );
   }
   /**
@@ -21,7 +29,11 @@ export class DateValidation extends BaseValidation {
       const datePattern = /^\d{4}-\d{2}-\d{2}$/;
       return datePattern.test(data)
         ? { valid: true }
-        : { valid: false, message: "INVALID_DATE_FORMAT" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_DATE_FORMAT"),
+            messageKey: "INVALID_DATE_FORMAT",
+          };
     });
 
     return this;
@@ -46,7 +58,11 @@ export class DateValidation extends BaseValidation {
 
       return isValid
         ? { valid: true }
-        : { valid: false, message: "INVALID_DATE" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_DATE"),
+            messageKey: "INVALID_DATE",
+          };
     });
 
     return this;
@@ -66,7 +82,11 @@ export class DateValidation extends BaseValidation {
 
       return inputDate < currentDate
         ? { valid: true }
-        : { valid: false, message: "INVALID_PAST_DATE" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_PAST_DATE"),
+            messageKey: "INVALID_PAST_DATE",
+          };
     });
 
     return this;
@@ -86,7 +106,11 @@ export class DateValidation extends BaseValidation {
 
       return inputDate > currentDate
         ? { valid: true }
-        : { valid: false, message: "INVALID_FUTURE_DATE" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_FUTURE_DATE"),
+            messageKey: "INVALID_FUTURE_DATE",
+          };
     });
 
     return this;
@@ -109,7 +133,11 @@ export class DateValidation extends BaseValidation {
 
       return inputDate >= start && inputDate <= end
         ? { valid: true }
-        : { valid: false, message: "INVALID_DATE_RANGE" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_DATE_RANGE"),
+            messageKey: "INVALID_DATE_RANGE",
+          };
     });
 
     return this;
@@ -119,7 +147,7 @@ export class DateValidation extends BaseValidation {
    * Checks if the date falls on a weekend (Saturday or Sunday).
    * Adds a validation rule that returns true if the date is a weekend.
    * If the date is not a weekend, it returns an invalid message.
-   * 
+   *
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isWeekend(): this {
@@ -127,11 +155,15 @@ export class DateValidation extends BaseValidation {
       const inputDate = new Date(data);
       const dayOfWeek = inputDate.getDay(); // 0 = Sunday, 6 = Saturday
 
-      const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+      const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
       return isWeekend
         ? { valid: true }
-        : { valid: false, message: "INVALID_NOT_WEEKEND" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_NOT_WEEKEND"),
+            messageKey: "INVALID_NOT_WEEKEND",
+          };
     });
 
     return this;

@@ -4,6 +4,7 @@ import {
   StringValidation,
   BoolValidation,
 } from "./";
+import { TValidationParam } from "../types/base.types";
 
 export class BaseValidation {
   protected rules: any[] = [];
@@ -23,19 +24,19 @@ export class BaseValidation {
     return { valid: true }; // All validations passed
   }
 
-  static isString() {
-    return new StringValidation();
+  static isString(param?: TValidationParam) {
+    return new StringValidation(param);
   }
 
-  static isNumber() {
-    return new NumberValidation();
+  static isNumber(param?: TValidationParam) {
+    return new NumberValidation(param);
   }
 
-  static isDate() {
-    return new DateValidation();
+  static isDate(param?: TValidationParam) {
+    return new DateValidation(param);
   }
 
-  static isBoolean() {
-    return new BoolValidation();
+  static isBoolean(param?: TValidationParam) {
+    return new BoolValidation(param);
   }
 }

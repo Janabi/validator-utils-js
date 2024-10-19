@@ -1,13 +1,21 @@
 import { BaseValidation } from "./";
 import { programmingLanguages, daysOfWeek, monthOfYear } from "../config";
+import { LocalTranslation } from "../utils/index.utils";
+import { TValidationParam } from "../types/base.types";
 
 export class StringValidation extends BaseValidation {
-  constructor() {
+  private loadTranslation: LocalTranslation;
+  constructor(param?: TValidationParam) {
     super();
+    this.loadTranslation = new LocalTranslation("string", param?.langauge);
     this.addRule((data: string) =>
       typeof data === "string"
         ? { valid: true }
-        : { valid: false, message: "INVALID_STRING" }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_STRING"),
+            messageKey: "INVALID_STRING",
+          }
     );
   }
   /**
@@ -23,7 +31,11 @@ export class StringValidation extends BaseValidation {
       const matchedEmail = emailPattern.test(data);
       return matchedEmail
         ? { valid: true }
-        : { valid: false, message: "INVALID_EMAIL" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_EMAIL"),
+            messageKey: "INVALID_EMAIL",
+          };
     });
 
     return this;
@@ -42,7 +54,11 @@ export class StringValidation extends BaseValidation {
       const matchedPhoneNumber = phoneNumberPattern.test(data);
       return matchedPhoneNumber
         ? { valid: true }
-        : { valid: false, message: "INVALID_PHONE_NUMBER" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_PHONE_NUMBER"),
+            messageKey: "INVALID_PHONE_NUMBER",
+          };
     });
 
     return this;
@@ -61,7 +77,11 @@ export class StringValidation extends BaseValidation {
       const matchedUrl = urlPattern.test(data);
       return matchedUrl
         ? { valid: true }
-        : { valid: false, message: "INVALID_URL" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_URL"),
+            messageKey: "INVALID_URL",
+          };
     });
 
     return this;
@@ -79,7 +99,11 @@ export class StringValidation extends BaseValidation {
     this.addRule((data: string) =>
       data.length >= minNumber
         ? { valid: true }
-        : { valid: false, message: "INVALID_VALUE_LENGTH" }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_VALUE_LENGTH"),
+            messageKey: "INVALID_VALUE_LENGTH",
+          }
     );
 
     return this;
@@ -97,7 +121,11 @@ export class StringValidation extends BaseValidation {
     this.addRule((data: string) =>
       data.length <= maxNumber
         ? { valid: true }
-        : { valid: false, message: "INVALID_VALUE_LENGTH" }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_VALUE_LENGTH"),
+            messageKey: "INVALID_VALUE_LENGTH",
+          }
     );
 
     return this;
@@ -116,7 +144,11 @@ export class StringValidation extends BaseValidation {
         JSON.parse(data);
         return { valid: true };
       } catch (err) {
-        return { valid: false, message: "INVALID_JSON" };
+        return {
+          valid: false,
+          message: this.loadTranslation.t("INVALID_JSON"),
+          messageKey: "INVALID_JSON",
+        };
       }
     });
 
@@ -137,7 +169,11 @@ export class StringValidation extends BaseValidation {
       const matchedUuid = uuidPattern.test(data);
       return matchedUuid
         ? { valid: true }
-        : { valid: false, message: "INVALID_UUID" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_UUID"),
+            messageKey: "INVALID_UUID",
+          };
     });
 
     return this;
@@ -160,7 +196,11 @@ export class StringValidation extends BaseValidation {
       const matchedFilePath = filePathPattern.test(data);
       return matchedFilePath
         ? { valid: true }
-        : { valid: false, message: "INVALID_FILE_PATH" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_FILE_PATH"),
+            messageKey: "INVALID_FILE_PATH",
+          };
     });
 
     return this;
@@ -177,7 +217,11 @@ export class StringValidation extends BaseValidation {
       const isValidLanguage = programmingLanguages.includes(data);
       return isValidLanguage
         ? { valid: true }
-        : { valid: false, message: "INVALID_PROGRAMMING_LANGUAGE" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_PROGRAMMING_LANGUAGE"),
+            messageKey: "INVALID_PROGRAMMING_LANGUAGE",
+          };
     });
 
     return this;
@@ -199,7 +243,11 @@ export class StringValidation extends BaseValidation {
       const isValidDay = daysOfWeek.includes(data.toLowerCase());
       return isValidDay
         ? { valid: true }
-        : { valid: false, message: "INVALID_DAY" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_DAY"),
+            messageKey: "INVALID_DAY",
+          };
     });
 
     return this;
@@ -221,7 +269,11 @@ export class StringValidation extends BaseValidation {
       const isValidMonth = monthOfYear.includes(data.toLowerCase());
       return isValidMonth
         ? { valid: true }
-        : { valid: false, message: "INVALID_MONTH" };
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_MONTH"),
+            messageKey: "INVALID_MONTH",
+          };
     });
 
     return this;
