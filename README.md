@@ -1,9 +1,10 @@
 # Validator Utils JS
 
-**validator-utils-js** is a flexible and lightweight JavaScript validation library for handling common data validation tasks such as validating strings, numbers, dates, and booleans. It provides a simple chainable methods to validate and customize various input types efficiently.
+**validator-utils-js** is a flexible and lightweight JavaScript validation library for handling common data validation tasks such as validating strings, numbers, dates, and booleans. It provides simple chainable methods to validate and customize various input types efficiently, now with localization support.
 
 ## Features
 
+- **Localization Support**: Translate validation error messages into multiple languages, with current support for `en` (English).
 - **String Validation**: Validate strings, emails, URLs, JSON, and more.
 - **Number Validation**: Check for positive, negative, even, odd numbers, etc.
 - **Date Validation**: Validate date formats, check if a date is in the past or future, within a range, etc.
@@ -16,6 +17,27 @@ To install the package, run the following command:
 
 ```bash
 npm install validator-utils-js
+```
+
+## Localization
+
+The package now supports localization for error messages. You can specify a language when instantiating the validator, and all error messages will be returned in that language. Currently supported languages are:
+
+- `en` for English (default)
+- `ar` for Arabic **(soon)**
+
+### Example: Setting the Language
+
+```javascript
+import { BaseValidation } from 'validator-utils-js';
+
+// Set the language to English for string validation
+const stringValidator = BaseValidation.isString({ language: 'ar' })
+  .isEmail()
+  .validate("example@example.com");
+
+console.log(stringValidator); 
+// Output (if invalid): { valid: false, message: "The input is not a valid email address." }
 ```
 
 ## Usage
@@ -137,4 +159,4 @@ console.log(dateRangeValidator); // { valid: true }
 
 ## License
 
-This project is licensed under the **ISC License**.  
+This project is licensed under the **ISC License**.

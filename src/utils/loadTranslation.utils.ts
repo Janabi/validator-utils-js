@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { ISupportedInputType, ISupportedLanguages } from "../types/index.types";
+import { systemConfig } from "../config";
 
 export class LocalTranslation {
   private translations: any = {};
@@ -17,7 +18,7 @@ export class LocalTranslation {
     try {
       const generalPath = path.join(
         __dirname,
-        `../locales/${this.language}/${this.type}.json`
+        `${systemConfig.localesPath}/${this.language}/${this.type}.json`
       );
 
       const generalTranslations = JSON.parse(
