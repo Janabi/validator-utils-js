@@ -278,4 +278,59 @@ export class StringValidation extends BaseValidation {
 
     return this;
   }
+
+  /**
+   * Validates if the string is a valid credit card number.
+   * Adds a validation rule that returns true if the string matches a standard credit card pattern
+   * and passes the Luhn algorithm check.
+   * If it does not match, returns an invalid credit card message.
+   *
+   * @returns {this} Returns the validation chain with the new rule applied.
+   */
+  isCreditCard(): this {
+    this.addRule((data: string) => {
+      const creditCardPattern =
+        /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9]{2})[0-9]{12}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
+      const isValidPattern = creditCardPattern.test(data);
+
+      const isValidLuhn = this.luhnCheck(data);
+
+      return isValidPattern && isValidLuhn
+        ? { valid: true }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_CREDIT_CARD"),
+            messageKey: "INVALID_CREDIT_CARD",
+          };
+    });
+
+    return this;
+  }
+
+  /**
+   * Luhn algorithm to validate credit card numbers.
+   * @param {string} cardNumber - The credit card number to validate.
+   * @returns {boolean} - True if the card number passes the Luhn check, false otherwise.
+   */
+  private luhnCheck(cardNumber: string): boolean {
+    let sum = 0;
+    let shouldDouble = false;
+
+    // Process each digit starting from the right
+    for (let i = cardNumber.length - 1; i >= 0; i--) {
+      let digit = parseInt(cardNumber[i]);
+
+      if (shouldDouble) {
+        digit *= 2;
+        if (digit > 9) {
+          digit -= 9;
+        }
+      }
+
+      sum += digit;
+      shouldDouble = !shouldDouble;
+    }
+
+    return sum % 10 === 0;
+  }
 }
