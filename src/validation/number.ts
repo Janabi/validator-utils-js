@@ -210,4 +210,35 @@ export class NumberValidation extends BaseValidation {
 
     return this;
   }
+
+  /**
+   * Adds a rule to check if the input number is a multiple of a specified number.
+   * This method validates by ensuring the input number is divisible by the provided divisor without a remainder.
+   *
+   * @param {number} divisor - The number to check for multiples.
+   * @returns {this} - The current instance for method chaining.
+   *
+   * Example usage:
+   * BaseValidator.isNumber().isMultipleOf(5).validate(10); // valid
+   *
+   * Note: The divisor should be a non-zero integer to avoid division errors.
+   */
+  isMultipleOf(divisor: number): this {
+    if (divisor === 0) {
+      throw new Error("Divisor cannot be zero.");
+    }
+
+    this.addRule((data: number) => {
+      const isValidMultiple = data % divisor === 0;
+      return isValidMultiple
+        ? { valid: true }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_MULTIPLE", { divisor }),
+            messageKey: "INVALID_MULTIPLE",
+          };
+    });
+
+    return this;
+  }
 }
