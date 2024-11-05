@@ -10,5 +10,6 @@
   "INVALID_PROGRAMMING_LANGUAGE": "The input is not a valid programming language.",
   "INVALID_DAY": "The input is not a valid day.",
   "INVALID_MONTH": "The input is not a valid month.",
+  "INVALID_CREDIT_CARD": "The input is not a valid credit card number.",
   "INVALID_ALPHANUM": "The input must contain only letters and numbers."
 }
