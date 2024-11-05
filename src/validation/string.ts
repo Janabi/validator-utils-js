@@ -278,4 +278,32 @@ export class StringValidation extends BaseValidation {
 
     return this;
   }
+
+  /**
+   * Adds a rule to check if the input contains only alphanumeric characters.
+   * This method validates by ensuring the string contains only letters and numbers.
+   *
+   * @returns {this} - The current instance for method chaining.
+   *
+   * Example usage:
+   * BaseValidator.isString().isAlphanum().validate("abc123");
+   *
+   * Note: This method does not allow special characters or spaces.
+   */
+  isAlphanum(): this {
+    this.addRule((data: string) => {
+      const alphanumPattern = /^[a-zA-Z0-9]+$/;
+      const isValidAlphanum = alphanumPattern.test(data);
+      
+      return isValidAlphanum
+        ? { valid: true }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_ALPHANUM"),
+            messageKey: "INVALID_ALPHANUM",
+          };
+    });
+
+    return this;
+  }
 }
