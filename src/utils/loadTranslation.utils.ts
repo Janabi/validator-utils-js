@@ -1,6 +1,10 @@
 import * as fs from "fs";
 import * as path from "path";
-import { ISupportedInputType, ISupportedLanguages } from "../types/index.types";
+import {
+  ISupportedInputType,
+  ISupportedLanguages,
+  IOptionAttributes,
+} from "../types/index.types";
 import { systemConfig } from "../config";
 
 export class LocalTranslation {
@@ -33,7 +37,19 @@ export class LocalTranslation {
   }
 
   // Fetch the translated message by key
-  public t(key: string): string {
-    return this.translations[key] || key; // Return key if no translation is found
+  public t(key: string, attr?: IOptionAttributes): string {
+    // Get the translation string or fallback to the key if not found
+    let message = this.translations[key] || key;
+
+    // If there are attributes, replace placeholders in the message
+    if (attr) {
+      message = message.replace(/{(\w+)}/g, (_: string, placeholder: string) => {
+        return attr[placeholder] !== undefined
+          ? String(attr[placeholder])
+          : `{${placeholder}}`;
+      });
+    }
+
+    return message;
   }
 }
