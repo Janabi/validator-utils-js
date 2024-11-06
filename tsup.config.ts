@@ -1,13 +1,16 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  format: ["cjs", "esm"],
-  entry: ["./src/index.ts"],
+  format: ["cjs"],
+  entry: ["src/**/*.ts"],
+  external: [],
   dts: true,
+  bundle: true,
+  treeshake: true,
   shims: true,
   skipNodeModulesBundle: true,
   clean: true,
   env: {
-    LOCALE_PATH: '../locales',
+    LOCALE_PATH: "../../locales",
   },
 });
