@@ -12,6 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/Janabi/validator-utils-js.git"
   },
+  "publishConfig": {
+    "registry": "https://github.com/Janabi/validator-utils-js"
+  },
   "keywords": [
     "validator",
     "checker",
