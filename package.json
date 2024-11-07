@@ -1,19 +1,21 @@
 {
-  "name": "validator-utils-js",
+  "name": "@janabi/validator-utils-js",
   "description": "validator-utils-js is a flexible and lightweight JavaScript validation library for handling common data validation tasks such as validating strings, numbers, dates, and booleans. It provides a simple chainable methods to validate and customize various input types efficiently.",
-  "version": "0.0.5",
+  "version": "0.0.5-development",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Janabi/validator-utils-js.git"
   },
   "publishConfig": {
-    "registry": "https://github.com/Janabi/validator-utils-js"
+    "registry": "https://github.com/Janabi/validator-utils-js",
+    "access": "public"
   },
   "keywords": [
     "validator",
@@ -35,7 +37,9 @@
     "@swc/core": "^1.9.1",
     "@types/node": "^22.7.7",
     "dotenv": "^16.4.5",
+    "semantic-release": "^24.2.0",
     "tsup": "^8.3.0",
     "typescript": "^5.6.2"
-  }
+  },
+  "files": ["dist", "README.md"]
 }
