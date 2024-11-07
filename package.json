@@ -14,7 +14,7 @@
     "url": "git+https://github.com/Janabi/validator-utils-js.git"
   },
   "publishConfig": {
-    "registry": "https://github.com/Janabi/validator-utils-js",
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "keywords": [
@@ -41,5 +41,8 @@
     "tsup": "^8.3.0",
     "typescript": "^5.6.2"
   },
-  "files": ["dist", "README.md"]
+  "files": [
+    "dist",
+    "README.md"
+  ]
 }
