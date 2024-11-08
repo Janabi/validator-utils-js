@@ -1,7 +1,7 @@
 {
   "name": "validator-utils-js",
   "description": "validator-utils-js is a flexible and lightweight JavaScript validation library for handling common data validation tasks such as validating strings, numbers, dates, and booleans. It provides a simple chainable methods to validate and customize various input types efficiently.",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
