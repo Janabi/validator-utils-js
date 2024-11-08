@@ -10,7 +10,8 @@
     "declaration": true,
     "isolatedModules": true,
     "noEmit": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "resolveJsonModule": true
   },
   "include": ["src", "test.ts"],
   "exclude": ["node_modules"]

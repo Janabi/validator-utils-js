@@ -10,7 +10,11 @@ export default defineConfig({
   shims: true,
   skipNodeModulesBundle: true,
   clean: true,
-  env: {
-    LOCALE_PATH: "../../locales",
+  loader: {
+    ".json": "json",
   },
+  env: {
+    LOCALE_PATH: "../locales",
+  },
+  onSuccess: "cpx 'locales/**/*.json' dist/locales",
 });
