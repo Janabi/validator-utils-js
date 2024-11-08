@@ -7,7 +7,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "postbuild": "cpx 'src/locales/**/*.json' dist/locales"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,7 @@
     "@semantic-release/release-notes-generator": "^14.0.1",
     "@swc/core": "^1.9.1",
     "@types/node": "^22.7.7",
+    "cpx": "^1.5.0",
     "dotenv": "^16.4.5",
     "semantic-release": "^24.2.0",
     "tsup": "^8.3.0",
