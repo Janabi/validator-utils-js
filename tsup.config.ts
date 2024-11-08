@@ -14,7 +14,7 @@ export default defineConfig({
     ".json": "json",
   },
   env: {
-    LOCALE_PATH: "../locales",
+    LOCALE_PATH: "./locales",
   },
   onSuccess: "cpx 'locales/**/*.json' dist/locales",
 });
