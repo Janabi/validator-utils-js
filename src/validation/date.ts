@@ -7,12 +7,12 @@ export class DateValidation extends BaseValidation {
   constructor(param?: TValidationParam) {
     super();
     this.loadTranslation = new LocalTranslation("date", param?.langauge);
-    this.addRule((data: string) =>
+    this.addRule((data: string, keyName: string) =>
       typeof data === "string"
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_DATE"),
+            message: this.loadTranslation.t("INVALID_DATE", keyName),
             messageKey: "INVALID_DATE",
           }
     );
@@ -25,13 +25,13 @@ export class DateValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isValidFormat(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const datePattern = /^\d{4}-\d{2}-\d{2}$/;
       return datePattern.test(data)
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_DATE_FORMAT"),
+            message: this.loadTranslation.t("INVALID_DATE_FORMAT", keyName),
             messageKey: "INVALID_DATE_FORMAT",
           };
     });
@@ -47,7 +47,7 @@ export class DateValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isValidDate(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const [year, month, day] = data.split("-").map(Number);
       const dateObject = new Date(year, month - 1, day);
 
@@ -60,7 +60,7 @@ export class DateValidation extends BaseValidation {
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_DATE"),
+            message: this.loadTranslation.t("INVALID_DATE", keyName),
             messageKey: "INVALID_DATE",
           };
     });
@@ -76,7 +76,7 @@ export class DateValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isInThePast(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const inputDate = new Date(data);
       const currentDate = new Date();
 
@@ -84,7 +84,7 @@ export class DateValidation extends BaseValidation {
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_PAST_DATE"),
+            message: this.loadTranslation.t("INVALID_PAST_DATE", keyName),
             messageKey: "INVALID_PAST_DATE",
           };
     });
@@ -100,7 +100,7 @@ export class DateValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isInTheFuture(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const inputDate = new Date(data);
       const currentDate = new Date();
 
@@ -108,7 +108,7 @@ export class DateValidation extends BaseValidation {
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_FUTURE_DATE"),
+            message: this.loadTranslation.t("INVALID_FUTURE_DATE", keyName),
             messageKey: "INVALID_FUTURE_DATE",
           };
     });
@@ -126,7 +126,7 @@ export class DateValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isWithinRange(startDate: string, endDate: string): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const inputDate = new Date(data);
       const start = new Date(startDate);
       const end = new Date(endDate);
@@ -135,7 +135,7 @@ export class DateValidation extends BaseValidation {
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_DATE_RANGE"),
+            message: this.loadTranslation.t("INVALID_DATE_RANGE", keyName),
             messageKey: "INVALID_DATE_RANGE",
           };
     });
@@ -151,7 +151,7 @@ export class DateValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isWeekend(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const inputDate = new Date(data);
       const dayOfWeek = inputDate.getDay(); // 0 = Sunday, 6 = Saturday
 
@@ -161,7 +161,7 @@ export class DateValidation extends BaseValidation {
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_NOT_WEEKEND"),
+            message: this.loadTranslation.t("INVALID_NOT_WEEKEND", keyName),
             messageKey: "INVALID_NOT_WEEKEND",
           };
     });

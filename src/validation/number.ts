@@ -7,12 +7,12 @@ export class NumberValidation extends BaseValidation {
   constructor(param?: TValidationParam) {
     super();
     this.loadTranslation = new LocalTranslation("number", param?.langauge);
-    this.addRule((data: number) =>
+    this.addRule((data: number, keyName: string) =>
       typeof data === "number"
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_NUMBER"),
+            message: this.loadTranslation.t("INVALID_NUMBER", keyName),
             messageKey: "INVALID_NUMBER",
           }
     );
@@ -25,12 +25,12 @@ export class NumberValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isPositive(): this {
-    this.addRule((data: number) => {
+    this.addRule((data: number, keyName: string) => {
       return data >= 0
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_POSITIVE"),
+            message: this.loadTranslation.t("INVALID_POSITIVE", keyName),
             messageKey: "INVALID_POSITIVE",
           };
     });
@@ -46,12 +46,12 @@ export class NumberValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isNegative(): this {
-    this.addRule((data: number) => {
+    this.addRule((data: number, keyName: string) => {
       return data <= 0
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_NEGATIVE"),
+            message: this.loadTranslation.t("INVALID_NEGATIVE", keyName),
             messageKey: "INVALID_NEGATIVE",
           };
     });
@@ -67,12 +67,12 @@ export class NumberValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isZero(): this {
-    this.addRule((data: number) => {
+    this.addRule((data: number, keyName: string) => {
       return data === 0
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_ZERO"),
+            message: this.loadTranslation.t("INVALID_ZERO", keyName),
             messageKey: "INVALID_ZERO",
           };
     });
@@ -88,12 +88,12 @@ export class NumberValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isOdd(): this {
-    this.addRule((data: number) => {
+    this.addRule((data: number, keyName: string) => {
       return data % 2 !== 0
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_ODD_NUMBER"),
+            message: this.loadTranslation.t("INVALID_ODD_NUMBER", keyName),
             messageKey: "INVALID_ODD_NUMBER",
           };
     });
@@ -109,35 +109,18 @@ export class NumberValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isEven(): this {
-    this.addRule((data: number) => {
+    this.addRule((data: number, keyName: string) => {
       return data % 2 === 0
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_EVEN_NUMBER"),
+            message: this.loadTranslation.t("INVALID_EVEN_NUMBER", keyName),
             messageKey: "INVALID_EVEN_NUMBER",
           };
     });
 
     return this;
   }
-
-  /**
-   * Checks if a specific bit is set in the number (i.e., if the bit is 1).
-   * Adds a validation rule that returns true if the bit at the given position is set.
-   * The bit position is 1-indexed, meaning the least significant bit is bit 1.
-   *
-   * @param {number} bitPosition - The position of the bit to check (1-based index).
-   * @returns {this} Returns the validation chain with the new rule applied.
-   */
-  // this method is deprecated
-  // isBitSet(bitPosition: number): this {
-  //   this.addRule((data: number) => {
-  //     return (data & (1 << (bitPosition - 1))) !== 0;
-  //   });
-
-  //   return this;
-  // }
 
   /**
    * Adds a rule to check if the input number is less than the specified suggested number.
@@ -150,12 +133,12 @@ export class NumberValidation extends BaseValidation {
    * BaseValidator.isNumber().isLess(10).validate(8); // valid: true
    */
   isLess(suggestedNumber: number): this {
-    this.addRule((data: number) => {
+    this.addRule((data: number, keyName: string) => {
       return data < suggestedNumber
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_LESS"),
+            message: this.loadTranslation.t("INVALID_LESS", keyName),
             messageKey: "INVALID_LESS",
           };
     });
@@ -174,12 +157,12 @@ export class NumberValidation extends BaseValidation {
    * BaseValidator.isNumber().isGreater(10).validate(12); // valid: true
    */
   isGreater(suggestedNumber: number): this {
-    this.addRule((data: number) => {
+    this.addRule((data: number, keyName: string) => {
       return data > suggestedNumber
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_GREATER"),
+            message: this.loadTranslation.t("INVALID_GREATER", keyName),
             messageKey: "INVALID_GREATER",
           };
     });
@@ -198,12 +181,12 @@ export class NumberValidation extends BaseValidation {
    * BaseValidator.isNumber().isEqual(5).validate(5); // valid: true
    */
   isEqual(suggestedNumber: number): this {
-    this.addRule((data: number) => {
+    this.addRule((data: number, keyName: string) => {
       return data === suggestedNumber
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_EQUAL"),
+            message: this.loadTranslation.t("INVALID_EQUAL", keyName),
             messageKey: "INVALID_EQUAL",
           };
     });
@@ -228,13 +211,13 @@ export class NumberValidation extends BaseValidation {
       throw new Error("Divisor cannot be zero.");
     }
 
-    this.addRule((data: number) => {
+    this.addRule((data: number, keyName: string) => {
       const isValidMultiple = data % divisor === 0;
       return isValidMultiple
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_MULTIPLE", { divisor }),
+            message: this.loadTranslation.t("INVALID_MULTIPLE", keyName, { divisor }),
             messageKey: "INVALID_MULTIPLE",
           };
     });

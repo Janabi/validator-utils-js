@@ -8,12 +8,12 @@ export class StringValidation extends BaseValidation {
   constructor(param?: TValidationParam) {
     super();
     this.loadTranslation = new LocalTranslation("string", param?.langauge);
-    this.addRule((data: string) =>
+    this.addRule((data: string, keyName: string) =>
       typeof data === "string"
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_STRING"),
+            message: this.loadTranslation.t("INVALID_STRING", keyName),
             messageKey: "INVALID_STRING",
           }
     );
@@ -26,14 +26,14 @@ export class StringValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isEmail(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       const matchedEmail = emailPattern.test(data);
       return matchedEmail
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_EMAIL"),
+            message: this.loadTranslation.t("INVALID_EMAIL", keyName),
             messageKey: "INVALID_EMAIL",
           };
     });
@@ -49,14 +49,14 @@ export class StringValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isPhoneNumber(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const phoneNumberPattern = /^\+?[1-9]\d{1,14}$/; // E.164 format (international phone numbers)
       const matchedPhoneNumber = phoneNumberPattern.test(data);
       return matchedPhoneNumber
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_PHONE_NUMBER"),
+            message: this.loadTranslation.t("INVALID_PHONE_NUMBER", keyName),
             messageKey: "INVALID_PHONE_NUMBER",
           };
     });
@@ -72,14 +72,14 @@ export class StringValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isUrl(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const urlPattern = /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-]*)*\/?$/;
       const matchedUrl = urlPattern.test(data);
       return matchedUrl
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_URL"),
+            message: this.loadTranslation.t("INVALID_URL", keyName),
             messageKey: "INVALID_URL",
           };
     });
@@ -96,12 +96,12 @@ export class StringValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   min(minNumber: number): this {
-    this.addRule((data: string) =>
+    this.addRule((data: string, keyName: string) =>
       data.length >= minNumber
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_VALUE_LENGTH"),
+            message: this.loadTranslation.t("INVALID_VALUE_LENGTH", keyName),
             messageKey: "INVALID_VALUE_LENGTH",
           }
     );
@@ -118,12 +118,12 @@ export class StringValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   max(maxNumber: number): this {
-    this.addRule((data: string) =>
+    this.addRule((data: string, keyName: string) =>
       data.length <= maxNumber
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_VALUE_LENGTH"),
+            message: this.loadTranslation.t("INVALID_VALUE_LENGTH", keyName),
             messageKey: "INVALID_VALUE_LENGTH",
           }
     );
@@ -139,14 +139,14 @@ export class StringValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isJson(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       try {
         JSON.parse(data);
         return { valid: true };
       } catch (err) {
         return {
           valid: false,
-          message: this.loadTranslation.t("INVALID_JSON"),
+          message: this.loadTranslation.t("INVALID_JSON", keyName),
           messageKey: "INVALID_JSON",
         };
       }
@@ -163,7 +163,7 @@ export class StringValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isUuid(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const uuidPattern =
         /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
       const matchedUuid = uuidPattern.test(data);
@@ -171,7 +171,7 @@ export class StringValidation extends BaseValidation {
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_UUID"),
+            message: this.loadTranslation.t("INVALID_UUID", keyName),
             messageKey: "INVALID_UUID",
           };
     });
@@ -189,7 +189,7 @@ export class StringValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isFilePath(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       // Regex pattern for Unix and Windows file paths
       const filePathPattern =
         /^(\/[^<>:"|?*]+)+\/?|([a-zA-Z]:\\(?:[^<>:"\/\\|?*]+\\)*[^<>:"\/\\|?*]*)$/;
@@ -198,7 +198,7 @@ export class StringValidation extends BaseValidation {
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_FILE_PATH"),
+            message: this.loadTranslation.t("INVALID_FILE_PATH", keyName),
             messageKey: "INVALID_FILE_PATH",
           };
     });
@@ -213,13 +213,13 @@ export class StringValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isProgrammingLanguage(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const isValidLanguage = programmingLanguages.includes(data);
       return isValidLanguage
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_PROGRAMMING_LANGUAGE"),
+            message: this.loadTranslation.t("INVALID_PROGRAMMING_LANGUAGE", keyName),
             messageKey: "INVALID_PROGRAMMING_LANGUAGE",
           };
     });
@@ -239,13 +239,13 @@ export class StringValidation extends BaseValidation {
    * Note: This method is case-insensitive, so "Monday" and "monday" both pass validation.
    */
   isDay(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const isValidDay = daysOfWeek.includes(data.toLowerCase());
       return isValidDay
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_DAY"),
+            message: this.loadTranslation.t("INVALID_DAY", keyName),
             messageKey: "INVALID_DAY",
           };
     });
@@ -265,13 +265,13 @@ export class StringValidation extends BaseValidation {
    * Note: This method is case-insensitive, so "January" and "january" both pass validation.
    */
   isMonth(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const isValidMonth = monthOfYear.includes(data.toLowerCase());
       return isValidMonth
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_MONTH"),
+            message: this.loadTranslation.t("INVALID_MONTH", keyName),
             messageKey: "INVALID_MONTH",
           };
     });
@@ -288,7 +288,7 @@ export class StringValidation extends BaseValidation {
    * @returns {this} Returns the validation chain with the new rule applied.
    */
   isCreditCard(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const creditCardPattern =
         /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9]{2})[0-9]{12}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
       const isValidPattern = creditCardPattern.test(data);
@@ -299,7 +299,7 @@ export class StringValidation extends BaseValidation {
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_CREDIT_CARD"),
+            message: this.loadTranslation.t("INVALID_CREDIT_CARD", keyName),
             messageKey: "INVALID_CREDIT_CARD",
           };
     });
@@ -319,7 +319,7 @@ export class StringValidation extends BaseValidation {
    * Note: This method does not allow special characters or spaces.
    */
   isAlphanum(): this {
-    this.addRule((data: string) => {
+    this.addRule((data: string, keyName: string) => {
       const alphanumPattern = /^[a-zA-Z0-9]+$/;
       const isValidAlphanum = alphanumPattern.test(data);
 
@@ -327,7 +327,7 @@ export class StringValidation extends BaseValidation {
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_ALPHANUM"),
+            message: this.loadTranslation.t("INVALID_ALPHANUM", keyName),
             messageKey: "INVALID_ALPHANUM",
           };
     });
