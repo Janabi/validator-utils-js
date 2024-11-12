@@ -14,9 +14,9 @@ export class BaseValidation {
   }
 
   // Validate method to execute all rules in the chain
-  validate(data: any) {
+  validate(data: any, keyName: string) {
     for (let rule of this.rules) {
-      const result = rule(data);
+      const result = rule(data, keyName);
       if (!result.valid) {
         return result; // Return the first failure
       }

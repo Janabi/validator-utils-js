@@ -1,3 +1,3 @@
 {
-  "INVALID_BOOLEAN": "The input is not a valid boolean."
+  "INVALID_BOOLEAN": "The input {keyName} is not a valid boolean."
 }

@@ -1,12 +1,12 @@
 {
-  "INVALID_NUMBER": "The input is not a valid number.",
-  "INVALID_POSITIVE": "The number must be positive.",
-  "INVALID_NEGATIVE": "The number must be negative.",
+  "INVALID_NUMBER": "The input {keyName} is not a valid number.",
+  "INVALID_POSITIVE": "The number {keyName} must be positive.",
+  "INVALID_NEGATIVE": "The number {keyName} must be negative.",
   "INVALID_ZERO": "The number cannot be zero.",
-  "INVALID_ODD_NUMBER": "The number must be odd.",
-  "INVALID_EVEN_NUMBER": "The number must be even.",
-  "INVALID_LESS": "The number must be less than the specified value.",
-  "INVALID_GREATER": "The number must be greater than the specified value.",
-  "INVALID_EQUAL": "The number must be equal to the specified value.",
-  "INVALID_MULTIPLE": "The input is not a multiple of {divisor}."
+  "INVALID_ODD_NUMBER": "The number {keyName} must be odd.",
+  "INVALID_EVEN_NUMBER": "The number {keyName} must be even.",
+  "INVALID_LESS": "The number {keyName} must be less than the specified value.",
+  "INVALID_GREATER": "The number {keyName} must be greater than the specified value.",
+  "INVALID_EQUAL": "The number {keyName} must be equal to the specified value.",
+  "INVALID_MULTIPLE": "The input {keyName} is not a multiple of {divisor}."
 }

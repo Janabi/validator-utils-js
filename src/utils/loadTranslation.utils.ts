@@ -37,9 +37,12 @@ export class LocalTranslation {
   }
 
   // Fetch the translated message by key
-  public t(key: string, attr?: IOptionAttributes): string {
+  public t(key: string, keyName: string, attr?: IOptionAttributes): string {
     // Get the translation string or fallback to the key if not found
     let message = this.translations[key] || key;
+
+    // replace the data for the input that applies validation on
+    message = message.replace(/{(\w+)}/g, keyName);
 
     // If there are attributes, replace placeholders in the message
     if (attr) {
