@@ -1,16 +1,17 @@
 # Validator Utils JS
 
-**validator-utils-js** is a flexible and lightweight JavaScript validation library for handling common data validation tasks such as validating strings, numbers, dates, and booleans. It provides simple chainable methods to validate and customize various input types efficiently, now with localization support.
+**validator-utils-js** is a flexible and lightweight JavaScript validation library for handling common data validation tasks such as validating strings, numbers, dates, and booleans. It provides simple chainable methods to validate and customize various input types efficiently, now with localization support and custom error key identification.
 
 ## Features
 
 - **Localization Support**: Translate validation error messages into multiple languages, with current support for `en` (English).
 - **String Validation**: Validate strings, emails, URLs, JSON, and more.
-- **Number Validation**: Check for positive, negative, even, odd numbers, etc.
+- **Number Validation**: Check for positive, negative, even, odd numbers, multiples, etc.
 - **Date Validation**: Validate date formats, check if a date is in the past or future, within a range, etc.
 - **Boolean Validation**: Validate if a value is a boolean.
+- **Custom Key Names**: Use `keyName` as an optional parameter in the `validate` function to indicate the input field name in returned error messages.
 - Chainable validation methods for custom validation pipelines.
-  
+
 ## Installation
 
 To install the package, run the following command:
@@ -21,7 +22,7 @@ npm install validator-utils-js
 
 ## Localization
 
-The package now supports localization for error messages. You can specify a language when instantiating the validator, and all error messages will be returned in that language. Currently supported languages are:
+The package supports localization for error messages. You can specify a language when instantiating the validator, and all error messages will be returned in that language. Currently supported languages are:
 
 - `en` for English (default)
 - `ar` for Arabic **(soon)**
@@ -31,18 +32,18 @@ The package now supports localization for error messages. You can specify a lang
 ```javascript
 import { BaseValidation } from 'validator-utils-js';
 
-// Set the language to English for string validation
-const stringValidator = BaseValidation.isString({ language: 'ar' })
+// Set the language to Arabic for string validation
+const stringValidator = BaseValidation.isString({ language: 'en' })
   .isEmail()
-  .validate("example@example.com");
+  .validate("example@example.com", "email");
 
 console.log(stringValidator); 
-// Output (if invalid): { valid: false, message: "The input is not a valid email address." }
+// Output (if invalid): { valid: false, message: "The input email is not a valid email address" }
 ```
 
 ## Usage
 
-Below are examples of how to use the validation utilities provided by **validator-utils-js**.
+Below are examples of how to use the validation utilities provided by **validator-utils-js**. Each `validate` function now accepts an optional `keyName` parameter, which specifies the name of the input field to include in the returned error message.
 
 ### Importing the Validators
 
@@ -64,20 +65,21 @@ You can chain string validation methods to check for conditions like email forma
 const stringValidator = BaseValidation.isString()
   .min(5)
   .isEmail()
-  .validate("example@example.com");
+  .validate("example@example.com", "email");
 
 console.log(stringValidator); // { valid: true }
 ```
 
 ### Number Validation
 
-Number validation supports checks for positive, negative, even, odd numbers, and more.
+Number validation supports checks for positive, negative, even, odd numbers, multiples, and more.
 
 ```javascript
 const numberValidator = BaseValidation.isNumber()
   .isPositive()
   .isEven()
-  .validate(10);
+  .isMultipleOf(5)
+  .validate(10, "quantity");
 
 console.log(numberValidator); // { valid: true }
 ```
@@ -90,7 +92,7 @@ Date validation allows you to check if the date is valid, in a specific format, 
 const dateValidator = BaseValidation.isDate()
   .isValidFormat()  // Check if date format is YYYY-MM-DD
   .isInThePast()    // Check if date is in the past
-  .validate("2020-05-15");
+  .validate("2020-05-15", "start_date");
 
 console.log(dateValidator); // { valid: true }
 ```
@@ -101,7 +103,7 @@ Boolean validation ensures that the input is a boolean value.
 
 ```javascript
 const boolValidator = BaseValidation.isBoolean()
-  .validate(true);
+  .validate(true, "isActive");
 
 console.log(boolValidator); // { valid: true }
 ```
@@ -111,7 +113,7 @@ console.log(boolValidator); // { valid: true }
 ```javascript
 const dateRangeValidator = BaseValidation.isDate()
   .isWithinRange("2020-01-01", "2020-12-31")
-  .validate("2020-06-15");
+  .validate("2020-06-15", "appointment_date");
 
 console.log(dateRangeValidator); // { valid: true }
 ```
@@ -131,6 +133,8 @@ console.log(dateRangeValidator); // { valid: true }
 - **isProgrammingLanguage()**: Validates if the string matches a known programming language.
 - **isDay()**: Validates if the string is a valid day of the week.
 - **isMonth()**: Validates if the string is a valid month.
+- **isCreditCard()**: Validates if the string is a valid credit card number using the Luhn algorithm.
+- **isAlphanum()**: Validates if the string contains only alphanumeric characters.
 
 ### Number Validation
 
@@ -139,10 +143,10 @@ console.log(dateRangeValidator); // { valid: true }
 - **isZero()**: Validates if the number is zero.
 - **isOdd()**: Validates if the number is odd.
 - **isEven()**: Validates if the number is even.
-- **isBitSet(bitPosition: number)**: Validates if a specific bit is set.
 - **isLess(value: number)**: Validates if the number is less than the specified value.
 - **isGreater(value: number)**: Validates if the number is greater than the specified value.
 - **isEqual(value: number)**: Validates if the number is equal to the specified value.
+- **isMultipleOf(divisor: number)**: Validates if the number is a multiple of the specified divisor.
 
 ### Date Validation
 
