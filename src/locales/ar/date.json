@@ -1,0 +1,8 @@
+{
+  "INVALID_DATE": "الإدخال {keyName} ليس تاريخًا صالحًا.",
+  "INVALID_DATE_FORMAT": "صيغة التاريخ لـ {keyName} غير صالحة.",
+  "INVALID_PAST_DATE": "يجب أن يكون التاريخ {keyName} في الماضي.",
+  "INVALID_FUTURE_DATE": "يجب أن يكون التاريخ {keyName} في المستقبل.",
+  "INVALID_DATE_RANGE": "نطاق التاريخ من البداية إلى النهاية غير صالح.",
+  "INVALID_NOT_WEEKEND": "يجب أن يكون التاريخ {keyName} في عطلة نهاية الأسبوع."
+}

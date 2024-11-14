@@ -1,0 +1,12 @@
+{
+  "INVALID_NUMBER": "الإدخال {keyName} ليس رقمًا صالحًا.",
+  "INVALID_POSITIVE": "يجب أن يكون الرقم {keyName} موجبًا.",
+  "INVALID_NEGATIVE": "يجب أن يكون الرقم {keyName} سالبًا.",
+  "INVALID_ZERO": "يجب ألا يكون الرقم صفرًا.",
+  "INVALID_ODD_NUMBER": "يجب أن يكون الرقم {keyName} فرديًا.",
+  "INVALID_EVEN_NUMBER": "يجب أن يكون الرقم {keyName} زوجيًا.",
+  "INVALID_LESS": "يجب أن يكون الرقم {keyName} أقل من القيمة المحددة.",
+  "INVALID_GREATER": "يجب أن يكون الرقم {keyName} أكبر من القيمة المحددة.",
+  "INVALID_EQUAL": "يجب أن يكون الرقم {keyName} مساويًا للقيمة المحددة.",
+  "INVALID_MULTIPLE": "الإدخال {keyName} ليس مضاعفًا لـ {divisor}."
+}
