@@ -5,7 +5,7 @@ import {
   ISupportedLanguages,
   IOptionAttributes,
 } from "../types/index.types";
-import { systemConfig } from "../config";
+import { systemConfig, locales } from "../config";
 
 export class LocalTranslation {
   private translations: any = {};
@@ -20,14 +20,7 @@ export class LocalTranslation {
   // Load both general and specific translations based on language
   private loadTranslations() {
     try {
-      const generalPath = path.join(
-        __dirname,
-        `${systemConfig.localesPath}/${this.language}/${this.type}.json`
-      );
-
-      const generalTranslations = JSON.parse(
-        fs.readFileSync(generalPath, "utf8")
-      );
+      const generalTranslations = locales[this.language][this.type];
 
       // Merge both general and specific translations
       this.translations = generalTranslations;
@@ -46,11 +39,14 @@ export class LocalTranslation {
 
     // If there are attributes, replace placeholders in the message
     if (attr) {
-      message = message.replace(/{(\w+)}/g, (_: string, placeholder: string) => {
-        return attr[placeholder] !== undefined
-          ? String(attr[placeholder])
-          : `{${placeholder}}`;
-      });
+      message = message.replace(
+        /{(\w+)}/g,
+        (_: string, placeholder: string) => {
+          return attr[placeholder] !== undefined
+            ? String(attr[placeholder])
+            : `{${placeholder}}`;
+        }
+      );
     }
 
     return message;
