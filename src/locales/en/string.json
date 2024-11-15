@@ -12,5 +12,8 @@
   "INVALID_MONTH": "The input {keyName} is not a valid month.",
   "INVALID_CREDIT_CARD": "The input {keyName} is not a valid credit card number.",
   "INVALID_ALPHANUM": "The input {keyName} must contain only letters and numbers.",
-  "INVALID_TOKEN": "The input {keyName} is not a valid token."
+  "INVALID_TOKEN": "The input {keyName} is not a valid token.",
+  "INVALID_IP_ADDRESS": "The input {keyName} is not a valid {type} address.",
+  "INVALID_IP_CIDR_REQUIRED": "The input {keyName} must include a CIDR notation.",
+  "INVALID_IP_CIDR_FORBIDDEN": "The input {keyName} must not include a CIDR notation."
 }

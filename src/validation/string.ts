@@ -362,9 +362,76 @@ export class StringValidation extends BaseValidation {
             valid: false,
             message: `${keyName || "Input"}: ${this.loadTranslation.t(
               "INVALID_TOKEN",
-              keyName,
+              keyName
             )}`,
             messageKey: "INVALID_TOKEN",
+          };
+    });
+
+    return this;
+  }
+
+  /**
+   * Validates if the string is a valid IP address.
+   * Adds a validation rule that checks if the input matches IPv4 or IPv6 format.
+   * Optionally, validates the IP type (IPv4 or IPv6) and CIDR notation usage.
+   *
+   * @param {("IPv4" | "IPv6" | undefined)} type - The optional type of IP address to validate (e.g., "IPv4" or "IPv6").
+   * @param {("optional" | "required" | "forbidden")} cidr - Specifies if CIDR notation is allowed, required, or forbidden.
+   * @returns {this} - The current instance for method chaining.
+   *
+   * Example usage:
+   * BaseValidation.isString().isIPAddress().validate("192.168.1.1"); // Valid for any IP
+   * BaseValidation.isString().isIPAddress("IPv4", "optional").validate("192.168.1.1"); // Valid IPv4 without CIDR
+   * BaseValidation.isString().isIPAddress("IPv4", "required").validate("192.168.1.0/24"); // Valid IPv4 with CIDR
+   */
+  isIPAddress(
+    type: "IPv4" | "IPv6" | "both" = "both",
+    cidr: "optional" | "required" | "forbidden" = "optional"
+  ): this {
+    this.addRule((data: string, keyName: string) => {
+      // IPv4 and IPv6 patterns
+      const ipv4Pattern =
+        /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\/([0-9]|[1-2][0-9]|3[0-2]))?$/;
+      const ipv6Pattern =
+        /^([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}(:\/([0-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8]))?|(([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:))$/;
+
+      const hasCidr = data.includes("/");
+      let isValidIP = false;
+
+      if (type === "IPv4") {
+        isValidIP = ipv4Pattern.test(data);
+      } else if (type === "IPv6") {
+        isValidIP = ipv6Pattern.test(data);
+      } else {
+        isValidIP = ipv4Pattern.test(data) || ipv6Pattern.test(data);
+      }
+
+      // CIDR validation logic
+      if (cidr === "required" && !hasCidr) {
+        return {
+          valid: false,
+          message: this.loadTranslation.t("INVALID_IP_CIDR_REQUIRED", keyName),
+          messageKey: "INVALID_IP_CIDR_REQUIRED",
+        };
+      }
+
+      if (cidr === "forbidden" && hasCidr) {
+        return {
+          valid: false,
+          message: this.loadTranslation.t("INVALID_IP_CIDR_FORBIDDEN", keyName),
+          messageKey: "INVALID_IP_CIDR_FORBIDDEN",
+        };
+      }
+
+      return isValidIP
+        ? { valid: true }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("INVALID_IP_ADDRESS", keyName, {
+              type,
+            }),
+            messageKey: "INVALID_IP_ADDRESS",
           };
     });
 

@@ -12,5 +12,8 @@
   "INVALID_MONTH": "الإدخال {keyName} ليس شهرًا صالحًا.",
   "INVALID_CREDIT_CARD": "الإدخال {keyName} ليس رقم بطاقة ائتمان صالحًا.",
   "INVALID_ALPHANUM": "يجب أن يحتوي الإدخال {keyName} على أحرف وأرقام فقط.",
-  "INVALID_TOKEN": "الإدخال {keyName} ليس رمزًا صالحًا."
+  "INVALID_TOKEN": "الإدخال {keyName} ليس رمزًا صالحًا.",
+  "INVALID_IP_ADDRESS": "الإدخال {keyName} ليس عنوان {type} صالحًا.",
+  "INVALID_IP_CIDR_REQUIRED": "يجب أن يتضمن الإدخال {keyName} ترميز CIDR.",
+  "INVALID_IP_CIDR_FORBIDDEN": "يجب ألا يتضمن الإدخال {keyName} ترميز CIDR."
 }
