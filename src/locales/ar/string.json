@@ -11,5 +11,6 @@
   "INVALID_DAY": "الإدخال {keyName} ليس يومًا صالحًا.",
   "INVALID_MONTH": "الإدخال {keyName} ليس شهرًا صالحًا.",
   "INVALID_CREDIT_CARD": "الإدخال {keyName} ليس رقم بطاقة ائتمان صالحًا.",
-  "INVALID_ALPHANUM": "يجب أن يحتوي الإدخال {keyName} على أحرف وأرقام فقط."
+  "INVALID_ALPHANUM": "يجب أن يحتوي الإدخال {keyName} على أحرف وأرقام فقط.",
+  "INVALID_TOKEN": "الإدخال {keyName} ليس رمزًا صالحًا."
 }

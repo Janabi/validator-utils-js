@@ -219,7 +219,10 @@ export class StringValidation extends BaseValidation {
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_PROGRAMMING_LANGUAGE", keyName),
+            message: this.loadTranslation.t(
+              "INVALID_PROGRAMMING_LANGUAGE",
+              keyName
+            ),
             messageKey: "INVALID_PROGRAMMING_LANGUAGE",
           };
     });
@@ -329,6 +332,39 @@ export class StringValidation extends BaseValidation {
             valid: false,
             message: this.loadTranslation.t("INVALID_ALPHANUM", keyName),
             messageKey: "INVALID_ALPHANUM",
+          };
+    });
+
+    return this;
+  }
+
+  /**
+   * Validates if the string is a valid token.
+   * Adds a validation rule that checks if the input matches a typical token format.
+   *
+   * @returns {this} - The current instance for method chaining.
+   *
+   * Example usage:
+   * BaseValidator.isString().isToken().validate("abc123.456-def", "apiToken");
+   *
+   * Note: You can customize the token regex to match your specific token structure.
+   */
+  isToken(): this {
+    this.addRule((data: string, keyName: string) => {
+      // Regex to match a token: alphanumeric characters, dots, dashes, and underscores
+      const tokenPattern = /^[a-zA-Z0-9._-]+$/;
+
+      const isValidToken = tokenPattern.test(data);
+
+      return isValidToken
+        ? { valid: true }
+        : {
+            valid: false,
+            message: `${keyName || "Input"}: ${this.loadTranslation.t(
+              "INVALID_TOKEN",
+              keyName,
+            )}`,
+            messageKey: "INVALID_TOKEN",
           };
     });
 
