@@ -11,5 +11,6 @@
   "INVALID_DAY": "The input {keyName} is not a valid day.",
   "INVALID_MONTH": "The input {keyName} is not a valid month.",
   "INVALID_CREDIT_CARD": "The input {keyName} is not a valid credit card number.",
-  "INVALID_ALPHANUM": "The input {keyName} must contain only letters and numbers."
+  "INVALID_ALPHANUM": "The input {keyName} must contain only letters and numbers.",
+  "INVALID_TOKEN": "The input {keyName} is not a valid token."
 }
