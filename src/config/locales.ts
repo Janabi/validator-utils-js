@@ -19,6 +19,8 @@ export const locales = {
       INVALID_ALPHANUM:
         "The input {keyName} must contain only letters and numbers.",
       INVALID_TOKEN: "The input {keyName} is not a valid token.",
+      INVALID_HEXADECIMAL:
+        "The input {keyName} is not a valid hexadecimal value.",
     },
     number: {
       INVALID_NUMBER: "The input {keyName} is not a valid number.",
@@ -63,6 +65,7 @@ export const locales = {
       INVALID_CREDIT_CARD: "الإدخال {keyName} ليس رقم بطاقة ائتمان صالحًا.",
       INVALID_ALPHANUM: "يجب أن يحتوي الإدخال {keyName} على أحرف وأرقام فقط.",
       INVALID_TOKEN: "الإدخال {keyName} ليس رمزًا صالحًا.",
+      INVALID_HEXADECIMAL: "الإدخال {keyName} ليس قيمة ست عشرية صالحة.",
     },
     number: {
       INVALID_NUMBER: "الإدخال {keyName} ليس رقمًا صالحًا.",
