@@ -362,9 +362,42 @@ export class StringValidation extends BaseValidation {
             valid: false,
             message: `${keyName || "Input"}: ${this.loadTranslation.t(
               "INVALID_TOKEN",
-              keyName,
+              keyName
             )}`,
             messageKey: "INVALID_TOKEN",
+          };
+    });
+
+    return this;
+  }
+
+  /**
+   * Validates if the string is a valid hexadecimal value.
+   * Adds a validation rule that checks if the input matches a hexadecimal format.
+   *
+   * @returns {this} - The current instance for method chaining.
+   *
+   * Example usage:
+   * BaseValidator.isString().isHexadecimal().validate("1a3f");
+   *
+   * Note: The method supports both uppercase and lowercase hexadecimal characters.
+   */
+  isHexadecimal(): this {
+    this.addRule((data: string, keyName?: string) => {
+      // Regex to match hexadecimal values
+      const hexPattern = /^[0-9a-fA-F]+$/;
+
+      const isValidHex = hexPattern.test(data);
+
+      return isValidHex
+        ? { valid: true }
+        : {
+            valid: false,
+            message: this.loadTranslation.t(
+              "INVALID_HEXADECIMAL",
+              keyName || ""
+            ),
+            messageKey: "INVALID_HEXADECIMAL",
           };
     });
 
