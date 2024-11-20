@@ -21,6 +21,11 @@ export const locales = {
       INVALID_TOKEN: "The input {keyName} is not a valid token.",
       INVALID_HEXADECIMAL:
         "The input {keyName} is not a valid hexadecimal value.",
+      INVALID_IP_ADDRESS: "The input {keyName} is not a valid {type} address.",
+      INVALID_IP_CIDR_REQUIRED:
+        "The input {keyName} must include a CIDR notation.",
+      INVALID_IP_CIDR_FORBIDDEN:
+        "The input {keyName} must not include a CIDR notation.",
     },
     number: {
       INVALID_NUMBER: "The input {keyName} is not a valid number.",
@@ -66,6 +71,9 @@ export const locales = {
       INVALID_ALPHANUM: "يجب أن يحتوي الإدخال {keyName} على أحرف وأرقام فقط.",
       INVALID_TOKEN: "الإدخال {keyName} ليس رمزًا صالحًا.",
       INVALID_HEXADECIMAL: "الإدخال {keyName} ليس قيمة ست عشرية صالحة.",
+      INVALID_IP_ADDRESS: "الإدخال {keyName} ليس عنوان {type} صالحًا.",
+      INVALID_IP_CIDR_REQUIRED: "يجب أن يتضمن الإدخال {keyName} ترميز CIDR.",
+      INVALID_IP_CIDR_FORBIDDEN: "يجب ألا يتضمن الإدخال {keyName} ترميز CIDR.",
     },
     number: {
       INVALID_NUMBER: "الإدخال {keyName} ليس رقمًا صالحًا.",
