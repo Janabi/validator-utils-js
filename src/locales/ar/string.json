@@ -15,5 +15,6 @@
   "INVALID_TOKEN": "الإدخال {keyName} ليس رمزًا صالحًا.",
   "INVALID_IP_ADDRESS": "الإدخال {keyName} ليس عنوان {type} صالحًا.",
   "INVALID_IP_CIDR_REQUIRED": "يجب أن يتضمن الإدخال {keyName} ترميز CIDR.",
-  "INVALID_IP_CIDR_FORBIDDEN": "يجب ألا يتضمن الإدخال {keyName} ترميز CIDR."
+  "INVALID_IP_CIDR_FORBIDDEN": "يجب ألا يتضمن الإدخال {keyName} ترميز CIDR.",
+  "INVALID_HEXADECIMAL": "الإدخال {keyName} ليس قيمة ست عشرية صالحة."
 }
