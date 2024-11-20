@@ -3,3 +3,4 @@ dotenv.config();
 
 export * from "./string";
 export * from "./system";
+export * from "./locales";
