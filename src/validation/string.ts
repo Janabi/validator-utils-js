@@ -432,7 +432,7 @@ export class StringValidation extends BaseValidation {
               type,
             }),
             messageKey: "INVALID_IP_ADDRESS",
-            };
+          };
     });
 
     return this;
@@ -465,6 +465,40 @@ export class StringValidation extends BaseValidation {
               keyName || ""
             ),
             messageKey: "INVALID_HEXADECIMAL",
+          };
+    });
+
+    return this;
+  }
+
+  /**
+   * Validates if the string is a valid currency format.
+   * Supports various currency symbols (e.g., $, €, £, ¥) and allows the symbol to appear
+   * at the beginning or end of the number. Also supports optional decimal points.
+   *
+   * @returns {this} - The current instance for method chaining.
+   *
+   * Example usage:
+   * BaseValidation.isString().isCurrency().validate("$123.45");
+   * BaseValidation.isString().isCurrency().validate("123.45€");
+   */
+  isCurrency(): this {
+    this.addRule((data: string, keyName?: string) => {
+      // Regex to match a wide range of currencies
+      const currencyPattern =
+        /^([$€£¥₹])?\s?\d{1,3}([,]\d{3})*(\.\d{1,2})?\s?([$€£¥₹])?$/;
+
+      const isValidCurrency = currencyPattern.test(data);
+
+      return isValidCurrency
+        ? { valid: true }
+        : {
+            valid: false,
+            message: this.loadTranslation.t(
+              "INVALID_CURRENCY",
+              keyName || "Input"
+            ),
+            messageKey: "INVALID_CURRENCY",
           };
     });
 

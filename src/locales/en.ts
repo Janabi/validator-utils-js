@@ -25,6 +25,7 @@ export const en = {
       "The input {keyName} must include a CIDR notation.",
     INVALID_IP_CIDR_FORBIDDEN:
       "The input {keyName} must not include a CIDR notation.",
+    INVALID_CURRENCY: "The input {keyName} is not a valid currency format.",
   },
   number: {
     INVALID_NUMBER: "The input {keyName} is not a valid number.",

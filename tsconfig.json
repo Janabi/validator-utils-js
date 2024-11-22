@@ -5,7 +5,7 @@
     "esModuleInterop": true,
     "strictNullChecks": true,
     "module": "ESNext",
-    "target": "ES5",
+    "target": "ES6",
     "moduleResolution": "Node10",
     "declaration": true,
     "isolatedModules": true,
