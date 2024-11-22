@@ -38,6 +38,7 @@ export const en = {
       "The number {keyName} must be greater than the specified value.",
     INVALID_EQUAL: "The number {keyName} must be equal to the specified value.",
     INVALID_MULTIPLE: "The input {keyName} is not a multiple of {divisor}.",
+    NOT_AN_INTEGER: "The input {keyName} is not an integer.",
   },
   boolean: {
     INVALID_BOOLEAN: "The input {keyName} is not a valid boolean.",

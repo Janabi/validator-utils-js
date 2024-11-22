@@ -147,6 +147,7 @@ console.log(dateRangeValidator); // { valid: true }
 - **isGreater(value: number)**: Validates if the number is greater than the specified value.
 - **isEqual(value: number)**: Validates if the number is equal to the specified value.
 - **isMultipleOf(divisor: number)**: Validates if the number is a multiple of the specified divisor.
+- **isInteger()**: Validates if the number is an integer.
 
 ### Date Validation
 
