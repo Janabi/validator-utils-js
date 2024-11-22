@@ -1,11 +1,9 @@
-import * as fs from "fs";
-import * as path from "path";
 import {
   ISupportedInputType,
   ISupportedLanguages,
   IOptionAttributes,
 } from "../types/index.types";
-import { systemConfig, locales } from "../config";
+import { locales } from "../locales";
 
 export class LocalTranslation {
   private translations: any = {};

@@ -13,8 +13,8 @@ export default defineConfig({
   loader: {
     ".json": "json",
   },
-  env: {
-    LOCALE_PATH: "./locales",
-  },
+  // env: {
+  //   LOCALE_PATH: "./locales",
+  // },
   onSuccess: "cpx 'locales/**/*.json' dist/locales",
 });
