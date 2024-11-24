@@ -168,4 +168,34 @@ export class DateValidation extends BaseValidation {
 
     return this;
   }
+
+  /**
+   * Validates if the year of the date is a leap year.
+   * Adds a validation rule that checks if the input corresponds to a leap year.
+   *
+   * @returns {this} - The current instance for method chaining.
+   *
+   * Example usage:
+   * BaseValidation.isDate().isLeapYear().validate("2024-02-29");
+   * BaseValidation.isDate().isLeapYear().validate("2023-02-28"); // Invalid
+   */
+  isLeapYear(): this {
+    this.addRule((data: string, keyName?: string) => {
+      const year = new Date(data).getFullYear();
+      const isLeap = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+
+      return isLeap
+        ? { valid: true }
+        : {
+            valid: false,
+            message: this.loadTranslation.t(
+              "NOT_A_LEAP_YEAR",
+              keyName || "Input"
+            ),
+            messageKey: "NOT_A_LEAP_YEAR",
+          };
+    });
+
+    return this;
+  }
 }

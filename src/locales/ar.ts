@@ -41,5 +41,6 @@ export const ar = {
     INVALID_FUTURE_DATE: "يجب أن يكون التاريخ {keyName} في المستقبل.",
     INVALID_DATE_RANGE: "نطاق التاريخ من البداية إلى النهاية غير صالح.",
     INVALID_NOT_WEEKEND: "يجب أن يكون التاريخ {keyName} في عطلة نهاية الأسبوع.",
+    NOT_A_LEAP_YEAR: "الإدخال {keyName} ليس سنة كبيسة.",
   },
 };

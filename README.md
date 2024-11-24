@@ -156,6 +156,7 @@ console.log(dateRangeValidator); // { valid: true }
 - **isInTheFuture()**: Validates if the date is in the future.
 - **isWithinRange(startDate: string, endDate: string)**: Validates if the date is within a given range.
 - **isWeekend()**: Validates if the date falls on a weekend.
+- **isLeapYear()**: Checks if the year of the date is a leap year.
 
 ### Boolean Validation
 
