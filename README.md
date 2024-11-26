@@ -161,6 +161,8 @@ console.log(dateRangeValidator); // { valid: true }
 ### Boolean Validation
 
 - **BaseValidation.isBoolean()**: Checks if the value is a boolean.
+- **isTrue()**: Validates if the boolean is explicitly true.
+- **isFalse()**: Validates if the boolean is explicitly false.
 
 ## License
 
