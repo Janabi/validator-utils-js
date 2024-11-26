@@ -217,8 +217,39 @@ export class NumberValidation extends BaseValidation {
         ? { valid: true }
         : {
             valid: false,
-            message: this.loadTranslation.t("INVALID_MULTIPLE", keyName, { divisor }),
+            message: this.loadTranslation.t("INVALID_MULTIPLE", keyName, {
+              divisor,
+            }),
             messageKey: "INVALID_MULTIPLE",
+          };
+    });
+
+    return this;
+  }
+
+  /**
+   * Validates if the number is an integer.
+   * Adds a validation rule that checks if the input is a whole number without decimal points.
+   *
+   * @returns {this} - The current instance for method chaining.
+   *
+   * Example usage:
+   * BaseValidation.isNumber().isInteger().validate(10);
+   * BaseValidation.isNumber().isInteger().validate(10.5); // Invalid
+   */
+  isInteger(): this {
+    this.addRule((data: number, keyName?: string) => {
+      const isValidInteger = Number.isInteger(data);
+
+      return isValidInteger
+        ? { valid: true }
+        : {
+            valid: false,
+            message: this.loadTranslation.t(
+              "NOT_AN_INTEGER",
+              keyName || "Input"
+            ),
+            messageKey: "NOT_AN_INTEGER",
           };
     });
 
