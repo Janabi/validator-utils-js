@@ -36,6 +36,9 @@ export const ar = {
     INVALID_BOOLEAN: "الإدخال {keyName} ليس قيمة منطقية صالحة.",
     NOT_TRUE: "الإدخال {keyName} ليس صحيحًا.",
     NOT_FALSE: "الإدخال {keyName} ليس خاطئًا.",
+    DOES_NOT_EQUAL: "الإدخال {keyName} لا يساوي {expected}.",
+    NOT_FALSY: "الإدخال {keyName} ليس خاطئًا.",
+    NOT_TRUTHY: "الإدخال {keyName} ليس صحيحًا.",
   },
   date: {
     INVALID_DATE: "الإدخال {keyName} ليس تاريخًا صالحًا.",

@@ -44,6 +44,9 @@ export const en = {
     INVALID_BOOLEAN: "The input {keyName} is not a valid boolean.",
     NOT_TRUE: "The input {keyName} is not true.",
     NOT_FALSE: "The input {keyName} is not false.",
+    DOES_NOT_EQUAL: "The input {keyName} does not equal {expected}.",
+    NOT_FALSY: "The input {keyName} is not falsy.",
+    NOT_TRUTHY: "The input {keyName} is not truthy.",
   },
   date: {
     INVALID_DATE: "The input {keyName} is not a valid date.",
