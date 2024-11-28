@@ -52,5 +52,6 @@ export const en = {
     INVALID_FUTURE_DATE: "The date {keyName} must be in the future.",
     INVALID_DATE_RANGE: "The date range from start to end is not valid.",
     INVALID_NOT_WEEKEND: "The date {keyName} must fall on a weekend.",
+    NOT_A_LEAP_YEAR: "The input {keyName} is not a leap year.",
   },
 };
