@@ -69,4 +69,85 @@ export class BoolValidation extends BaseValidation {
 
     return this;
   }
+
+  /**
+   * Validates if the boolean value equals the expected value.
+   * Adds a validation rule that checks if the input is strictly equal to the expected boolean value.
+   *
+   * @param {boolean} expected - The expected boolean value to compare against.
+   * @returns {this} - The current instance for method chaining.
+   *
+   * Example usage:
+   * BaseValidation.isBoolean().equalsTo(true).validate(true, "isActive");
+   * BaseValidation.isBoolean().equalsTo(false).validate(true, "isActive"); // Invalid
+   */
+  equalsTo(expected: boolean): this {
+    this.addRule((data: boolean, keyName?: string) => {
+      const isValid = data === expected;
+
+      return isValid
+        ? { valid: true }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("DOES_NOT_EQUAL", keyName || "", {
+              expected,
+            }),
+            messageKey: "DOES_NOT_EQUAL",
+          };
+    });
+
+    return this;
+  }
+
+  /**
+   * Validates if the value is falsy (e.g., false, 0, null, undefined, "", NaN).
+   * Adds a validation rule that checks if the input is falsy.
+   *
+   * @returns {this} - The current instance for method chaining.
+   *
+   * Example usage:
+   * BaseValidation.isBoolean().isFalsy().validate(false, "isDisabled");
+   * BaseValidation.isBoolean().isFalsy().validate(true, "isDisabled"); // Invalid
+   */
+  isFalsy(): this {
+    this.addRule((data: any, keyName?: string) => {
+      const isValidFalsy = !data;
+
+      return isValidFalsy
+        ? { valid: true }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("NOT_FALSY", keyName || ""),
+            messageKey: "NOT_FALSY",
+          };
+    });
+
+    return this;
+  }
+
+  /**
+   * Validates if the value is truthy (e.g., true, 1, "non-empty string").
+   * Adds a validation rule that checks if the input is truthy.
+   *
+   * @returns {this} - The current instance for method chaining.
+   *
+   * Example usage:
+   * BaseValidation.isBoolean().isTruthy().validate(true, "isActive");
+   * BaseValidation.isBoolean().isTruthy().validate(false, "isActive"); // Invalid
+   */
+  isTruthy(): this {
+    this.addRule((data: any, keyName?: string) => {
+      const isValidFalsy = !!data;
+
+      return isValidFalsy
+        ? { valid: true }
+        : {
+            valid: false,
+            message: this.loadTranslation.t("NOT_TRUTHY", keyName || ""),
+            messageKey: "NOT_TRUTHY",
+          };
+    });
+
+    return this;
+  }
 }
