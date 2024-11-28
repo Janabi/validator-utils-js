@@ -30,9 +30,12 @@ export const ar = {
     INVALID_GREATER: "يجب أن يكون الرقم {keyName} أكبر من القيمة المحددة.",
     INVALID_EQUAL: "يجب أن يكون الرقم {keyName} مساويًا للقيمة المحددة.",
     INVALID_MULTIPLE: "الإدخال {keyName} ليس مضاعفًا لـ {divisor}.",
+    NOT_AN_INTEGER: "الإدخال {keyName} ليس عددًا صحيحًا.",
   },
   boolean: {
     INVALID_BOOLEAN: "الإدخال {keyName} ليس قيمة منطقية صالحة.",
+    NOT_TRUE: "الإدخال {keyName} ليس صحيحًا.",
+    NOT_FALSE: "الإدخال {keyName} ليس خاطئًا.",
   },
   date: {
     INVALID_DATE: "الإدخال {keyName} ليس تاريخًا صالحًا.",
